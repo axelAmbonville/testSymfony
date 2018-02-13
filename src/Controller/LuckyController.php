@@ -22,10 +22,20 @@ class LuckyController extends Controller
     {
         $number = mt_rand(0, 10);
         if ($number==2) {
-            $number="celui-ci je le cache :)";
+            $number="celui-ci je le cache :) ";
         }
         return $this->render('lucky/number.html.twig', array(
             'number' => $number,
         ));
+    }
+    
+    /**
+     * @Route("/test", name="test_new_method")
+     */
+    public function test()
+    {
+        for($i=0;$i<10;$i++){
+            echo $i;
+        }
     }
 }
