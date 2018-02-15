@@ -6,6 +6,16 @@
         {% block stylesheets %}{% endblock %}
     </head>
     <body>
+        {% block menu %}
+            <nav>
+                <ul>
+                    <li><a href="{{ path('welcome') }}">Accueil</a></li>
+                    <li><a href="{{ path('app_lucky_number') }}">Nombre aléatoire</a></li>
+                    <li><a href="{{ path('test_new_method') }}">Page TEST</a></li>
+                    
+                </ul>
+            </nav>
+        {% endblock %}
         {% block body %}{% endblock %}
         {% block javascripts %}{% endblock %}
     </body>

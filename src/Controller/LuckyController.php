@@ -16,6 +16,14 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 class LuckyController extends Controller
 {
     /**
+     * @Route("/", name="welcome")
+     */
+    public function welcome()
+    {
+        return $this->render('welcome.html.twig');
+    }
+
+    /**
     * @Route("/lucky/number", name="app_lucky_number")
     */
     public function number()
@@ -34,8 +42,6 @@ class LuckyController extends Controller
      */
     public function test()
     {
-        for($i=0;$i<10;$i++){
-            echo $i;
-        }
+        return $this->render('test.html.twig');
     }
 }

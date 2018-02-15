@@ -1,0 +1,10 @@
+{# empty Twig template #}
+{% extends 'base.html.twig' %}
+{% block body %}
+<h1>Ceci est une page de test</h1>
+<p>
+Test de liens vers une autre page avec la method "PATH " :
+</p>
+
+<a href="{{ path('app_lucky_number') }}">page lucky number</a>
+{% endblock %}
