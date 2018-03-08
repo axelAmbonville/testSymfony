@@ -39,4 +39,47 @@ class Action
      * @ORM\Column(type="integer")
      */
     private $partie_id;
+    
+    
+    function getId() {
+        return $this->id;
+    }
+
+    function getNom() {
+        return $this->nom;
+    }
+
+    function getEtat() {
+        return $this->etat;
+    }
+
+    function getUser_id() {
+        return $this->user_id;
+    }
+
+    function getPartie_id() {
+        return $this->partie_id;
+    }
+
+    function setId($id) {
+        $this->id = $id;
+    }
+
+    function setNom($nom) {
+        $this->nom = $nom;
+    }
+
+    function setEtat($etat) {
+        $this->etat = $etat;
+    }
+
+    function setUser_id($user_id) {
+        $this->user_id = $user_id;
+    }
+
+    function setPartie_id($partie_id) {
+        $this->partie_id = $partie_id;
+    }
+
+
 }

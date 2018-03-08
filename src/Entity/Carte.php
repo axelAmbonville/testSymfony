@@ -33,4 +33,40 @@ class Carte
      * @ORM\Column(type="integer")
      */
     private $objectif_id;
+    
+    
+    
+    function getId() {
+        return $this->id;
+    }
+
+    function getValeur() {
+        return $this->valeur;
+    }
+
+    function getImage() {
+        return $this->image;
+    }
+
+    function getObjectif_id() {
+        return $this->objectif_id;
+    }
+
+    function setId($id) {
+        $this->id = $id;
+    }
+
+    function setValeur($valeur) {
+        $this->valeur = $valeur;
+    }
+
+    function setImage($image) {
+        $this->image = $image;
+    }
+
+    function setObjectif_id($objectif_id) {
+        $this->objectif_id = $objectif_id;
+    }
+
+
 }

@@ -27,4 +27,33 @@ class Objectif
      * @ORM\Column(type="text", length=150)
      */
     private $image;
+
+    
+    function getId() {
+        return $this->id;
+    }
+
+    function getValeur() {
+        return $this->valeur;
+    }
+
+    function getImage() {
+        return $this->image;
+    }
+
+    function setId($id) {
+        $this->id = $id;
+    }
+
+    function setValeur($valeur) {
+        $this->valeur = $valeur;
+    }
+
+    function setImage($image) {
+        $this->image = $image;
+    }
+
+
+    
 }
+
