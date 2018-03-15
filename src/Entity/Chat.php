@@ -17,7 +17,7 @@ class Chat
     private $message_id;
 
     /**
-     *
+     *@ORM\ManyToOne(targetEntity="App\Entity\User")
      * @ORM\Column(type="text", length=50)
      */
     private $user_pseudo;

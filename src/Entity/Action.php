@@ -41,6 +41,7 @@ class Action
     private $partie_id;
     
     
+    
     function getId() {
         return $this->id;
     }

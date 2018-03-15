@@ -18,8 +18,16 @@ class privateController extends Controller
     /**
      * @Route("/profil", name="profil")
      */
-    public function welcome()
+    public function connected_zone()
     {
         return $this->render('private/profil.html.twig');
+    }
+    
+    /**
+     * @Route("/rules", name="rules")
+     */
+    public function rules()
+    {
+        return $this->render('private/rules.html.twig');
     }
 }

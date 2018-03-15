@@ -21,20 +21,4 @@ class publicController extends Controller
     {
         return $this->render('public/welcome.html.twig');
     }
-
-    /**
-    * @Route("/leaderboard", name="leaderboard")
-    */
-    public function classement()
-    {
-        return $this->render('public/classement.html.twig');
-    }
-    
-    /**
-    * @Route("/presentation", name="presentation")
-    */
-    public function presentation()
-    {
-        return $this->render('public/presentation.html.twig');
-    }
 }

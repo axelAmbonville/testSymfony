@@ -29,7 +29,7 @@ class Carte
     private $image;
     
     /**
-     *
+     *@ORM\OneToMany(targetEntity="App\Entity\User")
      * @ORM\Column(type="integer")
      */
     private $objectif_id;
