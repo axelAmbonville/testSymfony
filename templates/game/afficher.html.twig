@@ -1,5 +1,39 @@
-{% extends 'base.html.twig' %}
 
 {% block body %}
-   Affichage de la partie
+    <h3>Affichage de la partie - ID : {{partie.id}}</h3>
+    <p>Manche : {{partie.manche}}</p>
+    <p>Tour : {{partie.tour}}</p>
+    
+    
+    <p>Carte écartée : {{partie.carte_rejected}}<p>
+    
+    
+    <p>
+        Main J1 :   
+        {% for carte in partie.Main_j1 %}
+        {{cartes[carte].Id}}
+        {% endfor %}
+    </p>  
+    
+    <p>
+        Main J2 :   
+        {% for carte in partie.Main_j2 %}
+        {{cartes[carte].Id}}
+        {% endfor %}
+    </p>
+
+    
+    <p>
+        Pioche :
+        {% for carte in partie.pioche %}
+        {{cartes[carte].Id}}
+        {% endfor %}
+    </p>
+    
+    <p>
+        Objectifs :   
+        {% for key,value in partie.objectifs %}
+        { {{key}} - {{value}} }
+        {% endfor %}
+    </p>
 {% endblock %}

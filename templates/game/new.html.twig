@@ -7,7 +7,7 @@
             <select name="adversaire">
                 <option value=""> Choisir</option>
                 {% for joueur in joueurs %}
-                    <option value="{{ joueur.id }}">{{ joueur.username }}</option>
+                    <option value="{{ joueur.id }}">{{ joueur.pseudo }}</option>
                 {% endfor %}
             </select>
         </div>

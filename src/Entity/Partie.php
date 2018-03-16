@@ -122,11 +122,11 @@ class Partie
     }
 
     function getMain_j1() {
-        return $this->main_j1;
+        return json_decode($this->main_j1);
     }
 
     function getMain_j2() {
-        return $this->main_j2;
+        return json_decode($this->main_j2);
     }
 
     function getCarte_placed_j1() {
@@ -154,11 +154,11 @@ class Partie
     }
 
     function getPioche() {
-        return $this->pioche;
+        return json_decode($this->pioche);
     }
 
     function getObjectifs() {
-        return $this->objectifs;
+        return (array)json_decode($this->objectifs);
     }
 
     function getActions_j1() {

@@ -59,24 +59,50 @@ class gameController extends Controller
         $tabPioche = $tabCartes; //sauvegarde des dernières cartes dans la pioche
         //créer un objet de type Partie
         $partie = new Partie();
-        $partie->setJoueur1($joueur);
-        $partie->setJoueur2($adversaire);
-        $partie->setCarteecarte($carteecarte);
-        $partie->setJ1Main(json_encode($tabMainJ1));
-        $partie->setJ2Main(json_encode($tabMainJ2));
+        $partie->setJ1_id(1);
+        $partie->setJ2_id(2);
+        $partie->setCarte_rejected($carteecarte);
+        
+        sort($tabMainJ1);
+        sort($tabMainJ2);
+        sort($tabPioche);
+        
+        $partie->setMain_j1(json_encode($tabMainJ1));
+        $partie->setMain_j2(json_encode($tabMainJ2));
         $partie->setPioche(json_encode($tabPioche));
+        
+        $partie->setCarte_placed_j1("[1:0,2:0,3:0,4:0,5:0,6:0,7:0]");
+        $partie->setCarte_placed_j2("[1:0,2:0,3:0,4:0,5:0,6:0,7:0]");
+        $partie->setManche(0);
+        $partie->setTour(0);
+        $partie->setScore_j1(0);
+        $partie->setScore_j2(0);
+        $partie->setActions_j1("a definir");
+        $partie->setActions_j2("a definir");
+        
+        $partie->setObjectifs(json_encode(array(1=>0,2=>0,3=>0,4=>0,5=>0,6=>0,7=>0)));
+        
         //Récupérer le manager de doctrine
         $em = $this->getDoctrine()->getManager();
         //Sauvegarde mon objet Partie dans la base de données
         $em->persist($partie);
         $em->flush();
-        return $this->redirectToRoute('afficher_partie', ['partie' => $partie->getId()]);
+        return $this->redirectToRoute('afficher_partie', ['id' => $partie->getId()]);
     }
     /**
      * @Route("/afficher/{id}", name="afficher_partie")
      */
     public function afficherPartie(Partie $partie) {
         //$partie
-        return $this->render('game/afficher.html.twig', ['partie' => $partie]);
+        $cartes = $this->getDoctrine()->getRepository("App:Carte")->findAll();
+        $objectifs = $this->getDoctrine()->getRepository("App:Objectif")->findAll();
+        
+        $tabCartes = array();
+        foreach ($cartes as $carte)
+        {
+            $tabCartes[$carte->getId()] = $carte;
+        }
+        
+        return $this->render('game/afficher.html.twig', ['cartes'=>$tabCartes, 'objectifs'=>$objectifs ,'partie' => $partie]);
     }
 }
