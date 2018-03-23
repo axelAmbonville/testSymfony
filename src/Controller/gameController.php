@@ -60,12 +60,11 @@ class gameController extends Controller
         //créer un objet de type Partie
         $partie = new Partie();
         $partie->setJ1_id(1);
-        $partie->setJ2_id(2);
+        $partie->setJ2_id($idAdversaire);
         $partie->setCarte_rejected($carteecarte);
         
         sort($tabMainJ1);
         sort($tabMainJ2);
-        sort($tabPioche);
         
         $partie->setMain_j1(json_encode($tabMainJ1));
         $partie->setMain_j2(json_encode($tabMainJ2));

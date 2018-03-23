@@ -6,4 +6,24 @@
 
 <p>Bievenue sur votre profil, vous pourrez retrouver certaines informations vous concernant sur le jeu. et un chat général</p>
 
+<h1>Bievenue {{joueur.pseudo}}, sur La Route du Shinobi!</h1>
+<table border="1">
+    <tr>
+        <td>Nbr de parties jouées</td>
+        <td>{{joueur.Parties_played}}</td>
+    </tr>
+    <tr>
+        <td>Nbr de parties gagnées</td>
+        <td>{{joueur.Parties_win}}</td>
+    </tr>
+    <tr>
+        <td>Nbr de parties perdues</td>
+        <td>{{joueur.Parties_loose}}</td>
+    </tr>
+    <tr>
+        <td>Score</td>
+        <td>{{joueur.Score}}</td>
+    </tr>
+</table>
+
 {% endblock %}

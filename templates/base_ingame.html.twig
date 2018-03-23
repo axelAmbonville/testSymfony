@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}Hanamikoji{% endblock %}</title>
+        
+        <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.css') }}"/>
+        <link rel="stylesheet" href="{{ asset('assets/css/bootstrap-grid.css') }}"/>
+        <link rel="stylesheet" href="{{ asset('assets/css/bootstrap-reboot.css') }}"/>
+        <link rel="stylesheet" href="{{ asset('assets/css/plateau.css') }}"/>
+        {% block stylesheets %}{% endblock %}
+    </head>
+    <body>
+        {% block menu %}                    
+        {% endblock %}
+        {% block body %}{% endblock %}
+        {% block javascripts %}{% endblock %}
+        <script type='text/javascript' src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
+        <script type='text/javascript' src="{{ asset('assets/js/bootstrap.js') }}"></script>
+        <script type='text/javascript' src="{{ asset('assets/js/bootstrap.bundle.js') }}"></script>
+    </body>
+</html>

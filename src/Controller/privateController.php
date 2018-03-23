@@ -20,7 +20,8 @@ class privateController extends Controller
      */
     public function connected_zone()
     {
-        return $this->render('private/profil.html.twig');
+        $joueur = $this->getDoctrine()->getRepository("App:User")->find(1);
+        return $this->render('private/profil.html.twig', ['joueur'=>$joueur]);
     }
     
     /**

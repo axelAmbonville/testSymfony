@@ -1,39 +1,47 @@
-
+{% extends 'base_ingame.html.twig' %}
 {% block body %}
     <h3>Affichage de la partie - ID : {{partie.id}}</h3>
     <p>Manche : {{partie.manche}}</p>
     <p>Tour : {{partie.tour}}</p>
     
     
-    <p>Carte écartée : {{partie.carte_rejected}}<p>
-    
-    
-    <p>
-        Main J1 :   
-        {% for carte in partie.Main_j1 %}
-        {{cartes[carte].Id}}
-        {% endfor %}
-    </p>  
+    <p>Carte écartée : {{partie.carte_rejected}}</p>
     
     <p>
-        Main J2 :   
+        Main J2 : {{partie.j2_id}}<br>
         {% for carte in partie.Main_j2 %}
-        {{cartes[carte].Id}}
+        <img src="{{cartes[carte].Id}}" />
         {% endfor %}
     </p>
 
     
-    <p>
-        Pioche :
-        {% for carte in partie.pioche %}
-        {{cartes[carte].Id}}
-        {% endfor %}
-    </p>
-    
-    <p>
-        Objectifs :   
-        {% for key,value in partie.objectifs %}
-        { {{key}} - {{value}} }
-        {% endfor %}
-    </p>
+     
+
+<div class="plateau">
+		<div class="zone_top">
+			<div class="actions_adverses"></div>
+			<div class="actions_zone"></div>
+		</div>
+		<div class="contain_deck">
+                    <div class="deck">
+                        Pioche :
+                        {% for carte in partie.pioche %}
+                            {{cartes[carte].Id}}
+                        {% endfor %}
+                    </div>
+			<div class="maitres">
+                            {% for key,value in partie.objectifs %}
+                                <div class="carte_maitre"><img src="{{ asset('assets/images/maitres/maitre_'~key~'.svg')}}" />{{value}}</div>
+                            {% endfor %}
+			</div>
+		</div>
+		<div class="contain_carte">
+			<div class="actions_boutons"></div>
+                        <div class="cartes_main">
+                               {% for carte in partie.Main_j1 %}
+                               <img class="carte_objet" src="{{ asset('assets/images/objets/objet_'~cartes[carte].Id~'.png')}}"/>
+                               {% endfor %}
+                        </div>
+		</div>
+	</div>
 {% endblock %}
