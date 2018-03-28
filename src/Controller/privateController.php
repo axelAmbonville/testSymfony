@@ -12,15 +12,19 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
-
+/**
+ * Class GameController
+ * @package App\Controller
+ * @Route("/connected")
+ */
 class privateController extends Controller
 {
     /**
      * @Route("/profil", name="profil")
      */
-    public function connected_zone()
+    public function profil()
     {
-        $joueur = $this->getDoctrine()->getRepository("App:User")->find(1);
+        $joueur = $this->getUser();
         return $this->render('private/profil.html.twig', ['joueur'=>$joueur]);
     }
     

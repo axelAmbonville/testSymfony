@@ -70,8 +70,7 @@ class Partie
     private $score_j2;
     
     /**
-     *
-     * @ORM\Column(type="integer")
+     * @ORM\ManyToOne(targetEntity="App\Entity\User")
      */
     private $tour;
     
@@ -162,11 +161,11 @@ class Partie
     }
 
     function getActions_j1() {
-        return $this->actions_j1;
+        return json_decode($this->actions_j1);
     }
 
     function getActions_j2() {
-        return $this->actions_j2;
+        return json_decode($this->actions_j2);
     }
 
     function setId($id) {

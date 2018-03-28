@@ -33,7 +33,7 @@ class gameController extends Controller
      */
     public function creerPartie(Request $request) {
         $idAdversaire = $request->request->get('adversaire');
-        $joueur = $this->getDoctrine()->getRepository(User::class)->find(1);
+        $joueur = $this->getDoctrine()->getRepository(User::class)->find($this->getUser()->getId());
         $adversaire = $this->getDoctrine()->getRepository(User::class)->find($idAdversaire);
         //récupérer les cartes depuis la base de données
         $cartes = $this->getDoctrine()->getRepository(Carte::class)->findAll();
@@ -59,9 +59,24 @@ class gameController extends Controller
         $tabPioche = $tabCartes; //sauvegarde des dernières cartes dans la pioche
         //créer un objet de type Partie
         $partie = new Partie();
-        $partie->setJ1_id(1);
+        $partie->setJ1_id($this->getUser()->getId());
         $partie->setJ2_id($idAdversaire);
         $partie->setCarte_rejected($carteecarte);
+        
+                
+        $partie->setCarte_placed_j1(json_encode(array(1=>0,2=>0,3=>0,4=>0,5=>0,6=>0,7=>0)));
+        $partie->setCarte_placed_j2(json_encode(array(1=>0,2=>0,3=>0,4=>0,5=>0,6=>0,7=>0)));
+        $partie->setManche(0);
+        
+        $random_tour = rand(1, 2);
+        if ($random_tour==1) {
+            $partie->setTour($joueur);
+            $tabMainJ1[] = array_pop($tabPioche);
+        }else{
+         $partie->setTour($adversaire);
+         $tabMainJ2[] = array_pop($tabPioche);
+        }
+        
         
         sort($tabMainJ1);
         sort($tabMainJ2);
@@ -69,15 +84,16 @@ class gameController extends Controller
         $partie->setMain_j1(json_encode($tabMainJ1));
         $partie->setMain_j2(json_encode($tabMainJ2));
         $partie->setPioche(json_encode($tabPioche));
-        
-        $partie->setCarte_placed_j1("[1:0,2:0,3:0,4:0,5:0,6:0,7:0]");
-        $partie->setCarte_placed_j2("[1:0,2:0,3:0,4:0,5:0,6:0,7:0]");
-        $partie->setManche(0);
-        $partie->setTour(0);
         $partie->setScore_j1(0);
         $partie->setScore_j2(0);
-        $partie->setActions_j1("a definir");
-        $partie->setActions_j2("a definir");
+        
+        $secret = ['etat'=>0,'cartes'=>0];
+        $dissimulation = ['etat'=>0,'cartes'=>[]];
+        $cadeau = ['etat'=>0,'cartes'=>[]];
+        $concurrence = ['etat'=>0,'cartes'=>[]];
+        $actions = array('secret'=>$secret, 'dissimulation'=>$dissimulation, 'cadeau'=>$cadeau, 'concurrence'=>$concurrence);
+        $partie->setActions_j1(json_encode($actions));
+        $partie->setActions_j2(json_encode($actions));
         
         $partie->setObjectifs(json_encode(array(1=>0,2=>0,3=>0,4=>0,5=>0,6=>0,7=>0)));
         
@@ -103,5 +119,80 @@ class gameController extends Controller
         }
         
         return $this->render('game/afficher.html.twig', ['cartes'=>$tabCartes, 'objectifs'=>$objectifs ,'partie' => $partie]);
+    }
+    
+    /**
+     * @Route("/passetour/{id}", name="passer_tour")
+     */
+    public function passerTour(Partie $partie){
+        
+        $tour_prec = $partie->getTour();
+        if($tour_prec->getID() == $partie->getJ1_id()){
+            $newTourJoueurId = $partie->getJ2_id();
+            $partie->setTour($this->getDoctrine()->getRepository("App:User")->find($newTourJoueurId));
+            
+            $pioche = $partie->getPioche();
+            $mainJTour = $partie->getMain_J2();
+            $mainJTour[] = array_pop($pioche);
+            sort($mainJTour);
+            $partie->setPioche(json_encode($pioche));
+            $partie->setMain_j2(json_encode($mainJTour));
+            
+        }elseif($tour_prec->getID() == $partie->getJ2_id()) {
+            $newTourJoueurId = $partie->getJ1_id();
+            $partie->setTour($this->getDoctrine()->getRepository("App:User")->find($newTourJoueurId));
+            
+            $pioche = $partie->getPioche();
+            $mainJTour = $partie->getMain_J1();
+            $mainJTour[] = array_pop($pioche);
+            sort($mainJTour);
+            $partie->setPioche(json_encode($pioche));
+            $partie->setMain_j1(json_encode($mainJTour));
+        }
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($partie);
+        $em->flush();
+        
+        return $this->redirectToRoute('afficher_partie', ['id' => $partie->getId()]);
+    }
+    
+    /**
+     * @Route("/action/secret/{id}", name="action_secret")
+     */
+    public function actionSecret(Partie $partie, Request $request) {
+        $idcarte = $request->request->get('idCarte');
+        $joueurId = $partie->getTour()->getId();
+        
+        if($joueurId == $partie->getJ1_id()){
+            $main = $partie->getMain_j1();
+            unset($main[array_search($idcarte, $main)]);
+            $main = array_values($main);
+            sort($main);
+            
+            $actions = $partie->getActions_j1();
+            $actions->secret->etat = 1;
+            $actions->secret->cartes = $idcarte;
+            
+            $partie->setMain_j1(json_encode($main));
+            $partie->setActions_j1(json_encode($actions));
+            
+        }elseif ($joueurId == $partie->getJ2_id()) {
+            $main = $partie->getMain_j2();
+            unset($main[array_search($idcarte, $main)]);
+            $main = array_values($main);
+            sort($main);
+            
+            $actions = $partie->getActions_j2();
+            $actions->secret->etat = 1;
+            $actions->secret->cartes = $idcarte;
+            
+            $partie->setMain_j2(json_encode($main));
+            $partie->setActions_j2(json_encode($actions));
+        }
+        
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($partie);
+        $em->flush();
+        return $this->redirectToRoute('passer_tour', ['id' => $partie->getId()]);
     }
 }

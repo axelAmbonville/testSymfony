@@ -2,25 +2,22 @@
 {% block body %}
     <h3>Affichage de la partie - ID : {{partie.id}}</h3>
     <p>Manche : {{partie.manche}}</p>
-    <p>Tour : {{partie.tour}}</p>
+    <p>Tour : {{partie.tour.username}}</p>
     
     
     <p>Carte écartée : {{partie.carte_rejected}}</p>
     
-    <p>
-        Main J2 : {{partie.j2_id}}<br>
-        {% for carte in partie.Main_j2 %}
-        <img src="{{cartes[carte].Id}}" />
-        {% endfor %}
-    </p>
-
-    
-     
-
 <div class="plateau">
 		<div class="zone_top">
-			<div class="actions_adverses"></div>
-			<div class="actions_zone"></div>
+			<div class="actions_adverses">
+                            {%if app.user.id == partie.j1_id%}
+                                Actions J2
+                            {% endif %}
+                            {%if app.user.id == partie.j2_id%}
+                                Actions J1
+                            {% endif %}
+                        </div>
+                        <div class="actions_zone"></div>
 		</div>
 		<div class="contain_deck">
                     <div class="deck">
@@ -36,11 +33,31 @@
 			</div>
 		</div>
 		<div class="contain_carte">
-			<div class="actions_boutons"></div>
+                    <div class="actions_boutons">
+                        {%if app.user.id == partie.tour.id%}
+                            {%if true %}
+                                <form method="POST" action="{{ path('action_secret', {'id':partie.id})}}">
+                                    <input type="text" name="idCarte" placeholder="Donner l'ID de la carte">
+                                    <input type="submit" name="secret" value="Secret">
+                                </form>
+                            {% endif %}        
+                        {% endif %}
+                        {%if app.user.id != partie.tour.id%}
+                            Ce n'est pas à votre tour de jouer!
+                        {% endif %}
+                    </div>
                         <div class="cartes_main">
-                               {% for carte in partie.Main_j1 %}
-                               <img class="carte_objet" src="{{ asset('assets/images/objets/objet_'~cartes[carte].Id~'.png')}}"/>
-                               {% endfor %}
+                                {% if app.user.id == partie.j1_id %}
+                                    {% for carte in partie.Main_j1 %}
+                                    <img class="carte_objet" src="{{ asset('assets/images/objets/objet_'~cartes[carte].Id~'.png')}}"/>{{ cartes[carte].id}}
+                                    {% endfor %}
+                                {% endif %}
+                                
+                                {% if app.user.id == partie.j2_id %}
+                                    {% for carte in partie.Main_j2 %}
+                                    <img class="carte_objet" src="{{ asset('assets/images/objets/objet_'~cartes[carte].Id~'.png')}}"/>{{ cartes[carte].id}}
+                                    {% endfor %}
+                                {% endif %}
                         </div>
 		</div>
 	</div>
