@@ -1,12 +1,11 @@
 {# empty Twig template #}
 {% extends 'base_public.html.twig' %}
 {% block body %}
-    <h1>Bienvenue sur le site Hanamikoji TEST</h1>
-    <h3>Vous vous trouvez sur la page d'accueil du site</h3>
+    <h1>Bienvenue sur le site Hanamikoji </h1>
+    <h3>Vous vous trouvez sur la page de connexion du site</h3>
     
     <ul>
         <li><a  href="{{path("security_login")}}">Connexion</a></li>
         <li><a  href="{{path("user_registration")}}">Inscription</a></li>
     </ul>
-
 {% endblock %}

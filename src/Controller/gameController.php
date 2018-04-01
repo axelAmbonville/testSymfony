@@ -195,4 +195,37 @@ class gameController extends Controller
         $em->flush();
         return $this->redirectToRoute('passer_tour', ['id' => $partie->getId()]);
     }
+    
+    /**
+     * @Route("/action/cadeau/{id}", name="action_cadeau")
+     */
+    
+    public function actionCadeau(Partie $partie, Request $request){
+        $joueurId = $partie->getTour()->getId();
+        $idCarte1 = $request->request->get('idCarte1');
+        $idCarte2 = $request->request->get('idCarte2');
+        $idCarte3 = $request->request->get('idCarte3');
+        
+        if($partie->getActions_j1()->etat == 0 || $partie->getActions_j1()->etat == 0){
+            if ($partie->getTour()->getId() == $partie->getJ1_id()) {
+                
+            }else if ($partie->getTour()->getId() == $partie->getJ2_id()) {
+                
+            }
+        }else if ($partie->getActions_j1()->etat == 1 || $partie->getActions_j1()->etat == 1) {
+            if ($partie->getTour()->getId() == $partie->getJ1_id()) {
+                
+            }else if ($partie->getTour()->getId() == $partie->getJ2_id()) {
+                
+            }
+        }
+    }
+    
+    /**
+     * @Route("/rafraichirPlateau/{id}", name="rafraichirPlateau")
+     */
+    public function rafraichirPlateau(Partie $partie, Request $request){
+        
+        return $this->redirectToRoute('afficher_partie', ['id' => $partie->getId()]);
+    }
 }

@@ -20,6 +20,14 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 class privateController extends Controller
 {
     /**
+     * @Route("/home", name="home")
+     */
+    public function home()
+    {
+        return $this->render('private/home.html.twig');
+    }
+    
+    /**
      * @Route("/profil", name="profil")
      */
     public function profil()

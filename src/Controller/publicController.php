@@ -14,6 +14,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 class publicController extends Controller
 {
+    
+    
     /**
      * @Route("/", name="welcome")
      */

@@ -19,7 +19,7 @@ security:
                 login_path: security_login
                 
                 csrf_token_generator: security.csrf.token_manager
-                default_target_path: profil
+                default_target_path: home
             
             logout:
                 path: security_logout
@@ -28,5 +28,5 @@ security:
 
     access_control:
         - { path: ^/admin, roles: ROLE_ADMIN }
-        - { path: ^/profil, roles: IS_AUTHENTICATED_FULLY }
+        - { path: ^/home, roles: IS_AUTHENTICATED_FULLY }
     
