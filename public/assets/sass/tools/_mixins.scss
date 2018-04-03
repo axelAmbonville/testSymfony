@@ -1,0 +1,16 @@
+@mixin font-size($sizeValue: 1.6) {
+  font-size: ($sizeValue * 10) + px;
+  font-size: $sizeValue + rem;
+}
+
+@mixin line-height($sizeValue: 1.6) {
+  line-height: ($sizeValue * 10) + px;
+  line-height: $sizeValue + rem;
+}
+
+@mixin antialiasing( $type:antialiased ) {
+  /* antialiased, none, subpixel-antialiased*/
+	-webkit-font-smoothing: $type;
+	font-smoothing: $type;
+	font-smooth: always;
+}

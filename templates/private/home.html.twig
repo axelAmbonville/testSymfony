@@ -1,11 +1,127 @@
 {# empty Twig template #}
 {% extends 'base_connected.html.twig' %}
 {% block body %}
-    <h1>Bienvenue sur le site Hanamikoji TEST</h1>
-    <h3>Vous vous trouvez sur la page d'accueil du site</h3>
-    
-    <ul>
-        <li><a  href="{{path("nouvelle_partie")}}">Jouer</a></li>
-    </ul>
-
+<header class="header">
+			<nav class="header-nav">
+				<div class="container-fluid">
+					<div class="row align-items-center">
+						<div class="header-logo offset-3 col-6 offset-sm-0 col-sm-2 col-lg-2 col-xl-1 order-sm-1">
+							<img class="img-fluid" src="{{asset('assets/images/logo.png')}}" alt="logo">
+						</div>
+						<div class="d-flex col-12 justify-content-center align-items-center">
+							<div id="burger-container">
+								<div id="burger">
+									<span></span>
+									<span></span>
+									<span></span>
+									<span></span>
+								</div>
+							</div>
+						</div>
+						<div class="header-menu col-12 offset-sm-3 col-sm offset-lg-3 col-lg offset-xl-7 col-xl d-flex align-items-center justify-content-between order-1">
+							<a href="{{path('nouvelle_partie')}}">Jeu</a>
+							<a href="{{path('rules')}}">Regles</a>
+							<a href="{{path('contact')}}">Assistance</a>
+							<a href="{{path('profil')}}">{{app.user.username}}</a>
+						</div>
+					</div>
+				</div>
+			</nav>
+			<div class="header-bg">
+				<img src="{{asset('assets/images/button.jpg')}}" alt="bouton jouer">
+				<a href="{{path('nouvelle_partie')}}">Jouer</a>
+			</div>
+		</header>
+		<div class="section-gradient">
+			<div class="container-fluid">
+				<section class="section-tuto">
+					<div class="row justify-content-center">
+						<h3>Comment jouer ?</h3>
+					</div>
+					<div class="row embed-responsive">
+						<video class="offset-0 col-12 offset-sm-1 col-sm-10 offset-md-2 col-md-8 offset-xl-3 col-xl-6" preload="true" autoplay loop poster="{{asset('assets/images/tuto.jpg')}}">
+							<source src="{{asset('assets/images/video/tuto.mp4')}}" type="video/mp4">
+							<source src="{{asset('assets/images/video/tuto.webm')}}" type="video/webm">
+							<source src="{{asset('images/video/tuto.ogg')}}" type="video/ogg">
+							"Vous n'avez pas de navigateur moderne, donc pas de balise video HTML5 !"
+						</video>
+					</div>
+				</section>
+			</div>
+			<section class="section-join section-join-bg">
+				<div class="offset-0 col-5 offset-sm-1 col-sm-4 col-md-3 col-lg-3 offset-xl-1 col-xl-2 section-join-shinobi">
+					<img class="img-fluid shinobi-join fadeInUp" data-wow-delay=".3s" src="{{asset('assets/images/shinobi-join.png')}}" alt="shinobi femme" style="animation-delay: 0.7s; animation-name: fadeInUp";>
+				</div>
+				<div class="row no-gutters">
+					<div class="col-9 col-md-6 section-join-l1 wow fadeInUp"  data-wow-delay=".4s" style="visibility: visible; animation-delay: 0.4s; animation-name: fadeInUp;">
+						<img class="img-fluid" src="{{asset('assets/images/zone-left.png')}}" alt="zone left">
+						<h2>Rejoignez
+						<span>le clan des</span> shinobis</h2>
+						<div class="btn btn-white d-flex justify-content-center align-items-center">
+							<a class="btn-text" href="#">En savoir plus</a>
+						</div>
+					</div>
+					<div class="offset-2 offset-md-0 col-10 col-md-6 section-join-l2">
+						<img class="img-fluid" src="{{asset('assets/images/zone-wind.png')}}" alt="zone wind">
+						<div class="col-6 section-join-packaging">
+							<img class="img-fluid" src="{{asset('assets/images/packaging.png')}}" alt="packaging">
+						</div>
+					</div>
+				</div>
+			</section>
+			<section class="section-invit">
+				<div class="row no-gutters">
+					<div class="offset-5 offset-sm-6 offset-md-7 offset-xl-8 offset-xl-1 col-6 col-sm-5 col-md-4 col-xl-3 order-2">
+						<img class="img-fluid shinobi-invit" src="{{asset('assets/images/shinobi-invit.png')}}" alt="shinobi femme">
+					</div>
+				</div>
+				<div class="row no-gutters">
+					<div class="col-10 col-md-6 section-invit-l1">
+						<img class="img-fluid" src="{{asset('assets/images/zone-wind-left.png')}}" alt=" zone wind left">
+						<div class="col-8 section-invit-flyer">
+							<img class="img-fluid" src="{{asset('assets/images/flyer.png')}}" alt="flyer">
+						</div>
+					</div>
+					<div class="offset-3 offset-md-0 col-9 col-md-6 section-invit-l2 order-first order-md-1">
+						<img src="{{asset('assets/images/zone-right.png')}}" alt="zone right" class="img-fluid">
+						<h2>Invitez de
+						<span>Nouvelles</span>
+						Recrues</h2>
+						<div class="btn btn-white d-flex justify-content-center align-items-center">
+							<a class="btn-text" href="#">En savoir plus</a>
+						</div>
+					</div>
+				</div>
+			</section>
+			<section class="section-tournament section-tournament-bg">
+				<div class="container-fluid">
+					<div class="row">
+						<div class="offset-0 col-9 offset-md-2 col-md-6 section-tournament-l1">
+							<img src="{{asset('assets/images/tournament.png')}}" alt="tournament" class="img-fluid">
+						</div>
+						<div class="offset-0 col-9 offset-md-4 col-md-6 section-tournament-l2">
+							<img src="{{asset('assets/images/zone-white.png')}}" alt="zone white" class="img-fluid">
+							<h2>Tournois
+							<span>des shinobis</span></h2>
+							<div class="btn btn-black d-flex justify-content-center align-items-center">
+								<a class="btn-text" href="#">En savoir plus</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+		</div>
+		<footer class="footer">
+			<div class="container-fluid">
+				<div class="d-flex align-items-center justify-content-between">
+					<p>All rights reserved. StudioGIBS</p>
+					<div class="col-lg-3 d-flex justify-content-between align-items-center">
+						<img class="img-fluid footer-networks" src="{{asset('assets/images/instagram-logo.png')}}" alt="instagram logo">
+						<img class="img-fluid footer-networks" src="{{asset('assets/images/facebook-logo.png')}}" alt="logo facebook">
+						<img class="img-fluid footer-networks" src="{{asset('assets/images/twitter-logo.png')}}" alt="logo twitter">
+					</div>
+					<img class="img-fluid footer-logo" src="{{asset('assets/images/logo-agence.png')}}" alt="logo agence">
+				</div>
+			</div>
+		</footer>
 {% endblock %}

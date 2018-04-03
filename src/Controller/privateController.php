@@ -43,4 +43,12 @@ class privateController extends Controller
     {
         return $this->render('private/rules.html.twig');
     }
+    
+    /**
+     * @Route("/contact", name="contact")
+     */
+    public function contact()
+    {
+        return $this->render('private/contact.html.twig');
+    }
 }

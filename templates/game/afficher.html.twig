@@ -1,6 +1,6 @@
 {% extends 'base_ingame.html.twig' %}
 {% block body %}
-	<h3>Affichage de la partie - ID : {{partie.id}}</h3>
+    <h3>Affichage de la partie - ID : {{partie.id}}</h3>
     <p>Manche : {{partie.manche}}</p>
     <p>Tour : {{partie.tour.username}}</p>
     {%if app.user.id == partie.tour.id%}
@@ -18,188 +18,189 @@
                                     <input type="text" name="idCarte3" placeholder="Donner l'ID de la carte">
                                     <input type="submit" name="cadeau" value="Cadeau">
                                 </form>
-                            {% endif %}
+                             {% endif %}
                         {% endif %}
                         {%if app.user.id != partie.tour.id%}
                             Ce n'est pas à votre tour de jouer!
                         {% endif %}
 
-	<div class="plateau">
-		<div class="actions_adverses">
-			{%if app.user.id == partie.j1_id%}
+    <div class="plateau">
+        <div class="actions_adverses">
+            {%if app.user.id == partie.j1_id%}
                                 <div class="actions_adverses_top"><!--Actions J2 a afficher-->
-									<img src="{{ asset('assets/images/plateau/jetons_action1.png')}}" height="100%">
-									<img src="{{ asset('assets/images/plateau/jetons_action2.png')}}" height="100%">
-								</div>
-								<div class="actions_adverses_bot">
-									<img src="{{ asset('assets/images/plateau/jetons_action3.png')}}" height="100%">
-									<img src="{{ asset('assets/images/plateau/jetons_action4.png')}}" height="100%">
-								</div>
+                                    <img src="{{ asset('assets/images/plateau/jetons_action1.png')}}" height="100%" title="Action 1 : Secret">
+                                    <img src="{{ asset('assets/images/plateau/jetons_action2.png')}}" height="100%" title="Action 2 : Dissimulation">
+                                </div>
+                                <div class="actions_adverses_bot">
+                                    <img src="{{ asset('assets/images/plateau/jetons_action3.png')}}" height="100%" title="Action 3 : Cadeau">
+                                    <img src="{{ asset('assets/images/plateau/jetons_action4.png')}}" height="100%" title="Action 4 : Concurrence">
+                                </div>
                             {% endif %}
                             {%if app.user.id == partie.j2_id%}
                                 <div class="actions_adverses_top"><!--Actions J1 a afficher-->
-									<img src="{{ asset('assets/images/plateau/jetons_action1.png')}}" height="100%">
-									<img src="{{ asset('assets/images/plateau/jetons_action2.png')}}" height="100%">
-								</div>
-								<div class="actions_adverses_bot">
-									<img src="{{ asset('assets/images/plateau/jetons_action3.png')}}" height="100%">
-									<img src="{{ asset('assets/images/plateau/jetons_action4.png')}}" height="100%">
-								</div>
+                                    <img src="{{ asset('assets/images/plateau/jetons_action1.png')}}" height="100%" title="Action 1 : Secret">
+                                    <img src="{{ asset('assets/images/plateau/jetons_action2.png')}}" height="100%" title="Action 2 : Dissimulation">
+                                </div>
+                                <div class="actions_adverses_bot">
+                                    <img src="{{ asset('assets/images/plateau/jetons_action3.png')}}" height="100%" title="Action 3 : Cadeau">
+                                    <img src="{{ asset('assets/images/plateau/jetons_action4.png')}}" height="100%" title="Action 4 : Concurrence">
+                                </div>
                             {% endif %}
-		</div>
-		<div class="actions_joueur">
-			<div class="action1 act">
-				<div class="act_left">
-					<div class="emplacement"></div>
-				</div>
-				<div class="act_right">
-					<div class="valid">
-						<button>OK</button>
-						<button class="cancel">ANNULER</button>
-					</div>
-				</div>
-			</div>
-			 <div class="action2 act">
-				<div class="act_left">
-					<div class="emplacement"></div>
-					<div class="emplacement"></div>
-				</div>
-				<div class="act_right">
-					<div class="valid">
-						<button>OK</button>
-						<button class="cancel">ANNULER</button>
-					</div>
-				</div>
-			</div>
-			<div class="action3 act">
-				<div class="act_left">
-					<div class="emplacement"></div>
-					<div class="emplacement"></div>
-					<div class="emplacement"></div>
-				</div>
-				<div class="act_right">
-					<div class="valid">
-						<button>OK</button>
-						<button class="cancel">ANNULER</button>
-					</div>
-				</div>
-			</div>
-			<div class="action4 act">
-				<div class="act_left">
-					<div class="emplacement"></div>
-					<div class="emplacement"></div>
-					<div class="emplacement"></div>
-					<div class="emplacement"></div>
-				</div>
-				<div class="act_right">
-					<div class="valid">
-						<button>OK</button>
-						<button class="cancel">ANNULER</button>
-					</div>
-				</div>
-			</div> 
-		</div>
-		<div class="deck">
-			<div class="carte">
+        </div>
+        <div class="actions_joueur">
+            <div id="action1" class="act">
+                <div class="act_left">
+                    <div class="emplacement" id="empl1">
+                        
+                    </div>
+                </div>
+                <div class="act_right">
+                    <div class="valid">
+                        <form method="" action="">
+                            <input id="input1" name="envois" type="hidden">
+                            <input type="submit" value="OK">
+                        </form>
+                            <button class="cancel">ANNULER</button>
+                    </div>
+                </div>
+            </div>
+             <div id="action2" class="act">
+                <div class="act_left">
+                    <div class="emplacement" id="empl2_1"></div>
+                    <div class="emplacement" id="empl2_2"></div>
+                </div>
+                <div class="act_right">
+                    <div class="valid">
+                        <form method="" action="">
+                            <input id="input2_1" name="envois1" type="hidden">
+                            <input id="input2_2" name="envois2" type="hidden">
+                            <input type="submit" value="OK">
+                        </form>
+                        <button class="cancel">ANNULER</button>
+                    </div>
+                </div>
+            </div>
+            <div id="action3" class="act">
+                <div class="act_left">
+                    <div class="emplacement" id="empl3_1"></div>
+                    <div class="emplacement" id="empl3_2"></div>
+                    <div class="emplacement" id="empl3_3"></div>
+                </div>
+                <div class="act_right">
+                    <div class="valid">
+                        <form method="" action="">
+                            <input id="input3_1" name="envois1" type="hidden">
+                            <input id="input3_2" name="envois2" type="hidden">
+                            <input id="input3_3" name="envois3" type="hidden">
+                            <input type="submit" value="OK">
+                        </form>
+                        <button class="cancel">ANNULER</button>
+                    </div>
+                </div>
+            </div>
+            <div id="action4" class="act">
+                <div class="act_left">
+                    <div class="emplacement" id="empl4_1"></div>
+                    <div class="emplacement" id="empl4_2"></div>
+                    <div class="emplacement" id="empl4_3"></div>
+                    <div class="emplacement" id="empl4_4"></div>
+                </div>
+                <div class="act_right">
+                    <div class="valid">
+                        <form method="" action="">
+                            <input id="input4_1" name="envois1" type="hidden">
+                            <input id="input4_2" name="envois2" type="hidden">
+                            <input id="input4_3" name="envois3" type="hidden">
+                            <input id="input4_4" name="envois4" type="hidden">
+                            <input type="submit" value="OK">
+                        </form>
+                        <button class="cancel">ANNULER</button>
+                    </div>
+                </div>
+            </div> 
+        </div>
+        <div class="deck">
+            <div class="carte">
                             <img src="{{ asset('assets/images/plateau/background.png')}}" height="100%">
-				{% for carte in partie.pioche %}
+                {% for carte in partie.pioche %}
                             {{cartes[carte].Id}}
                         {% endfor %}
-			</div>
-		</div>
-		<div class="cartes_maitres">
-			{% for key,value in partie.objectifs %}
+            </div>
+        </div>
+        <div class="cartes_maitres">
+            {% for key,value in partie.objectifs %}
                 <div class="maitres" id="m{{key}}">
-					<img class="face_vosible" src="{{ asset('assets/images/maitres/maitre_'~key~'.svg')}}" height="100%">
-					<img class="couverture" src="{{ asset('assets/images/plateau/background.png')}}" height="100%">{{value}}
-				</div>
+                    <img class="face_vosible" src="{{ asset('assets/images/maitres/maitre_'~key~'.svg')}}" height="100%">
+                    <img class="couverture" src="{{ asset('assets/images/plateau/background.png')}}" height="100%">{{value}}
+                </div>
             {% endfor %}
-		</div>
-		<div class="actions">
-			{%if app.user.id == partie.tour.id%}
-				<div class="actions_top">
-					<img src="{{ asset('assets/images/plateau/jetons_action1.png')}}" id="act1" height="100%">
-					<img src="{{ asset('assets/images/plateau/jetons_action2.png')}}" id="act2" height="100%">
-				</div>
-				<div class="actions_bot">
-					<img src="{{ asset('assets/images/plateau/jetons_action3.png')}}" id="act3" height="100%">
-					<img src="{{ asset('assets/images/plateau/jetons_action4.png')}}" id="act4" height="100%">
-				</div>
-			{% endif %}
-			{%if app.user.id != partie.tour.id%}
+        </div>
+        <div class="actions">
+            {%if app.user.id == partie.tour.id%}
+                <div class="actions_top">
+                    <img src="{{ asset('assets/images/plateau/jetons_action1.png')}}" id="act1" class="act_click" height="100%" title="Action 1 : Secret">
+                    <img src="{{ asset('assets/images/plateau/jetons_action2.png')}}" id="act2" class="act_click" height="100%" title="Action 2 : Dissimulation">
+                </div>
+                <div class="actions_bot">
+                    <img src="{{ asset('assets/images/plateau/jetons_action3.png')}}" id="act3" class="act_click" height="100%" title="Action 3 : Cadeau">
+                    <img src="{{ asset('assets/images/plateau/jetons_action4.png')}}" id="act4" class="act_click" height="100%" title="Action 4 : Concurrence">
+                </div>
+            {% endif %}
+            {%if app.user.id != partie.tour.id%}
                             Ce n'est pas à votre tour de jouer!
                         {% endif %}
-		</div>
-		<div class="main_user">
-			{% if app.user.id == partie.j1_id %}
+        </div>
+        <div class="main_user">
+            {% if app.user.id == partie.j1_id %}
                 {% for carte in partie.Main_j1 %}
-                    <div class="hand">
-                        <img id="{{cartes[carte].Id}}" src="{{ asset('assets/images/objets/objet_'~cartes[carte].Id~'.png')}}" height="100%" />{{ cartes[carte].id}}
+                    <div class="hand" id="{{cartes[carte].Id}}">
+                        <img  src="{{ asset('assets/images/objets/objet_'~cartes[carte].Id~'.png')}}" height="100%" />{{ cartes[carte].id}}
                     </div>
                 {% endfor %}
             {% endif %}
                                 
             {% if app.user.id == partie.j2_id %}
                 {% for carte in partie.Main_j2 %}
-                    <div class="hand">
-                        <img id="{{cartes[carte].Id}}" src="{{ asset('assets/images/objets/objet_'~cartes[carte].Id~'.png')}}" height="100%" />{{ cartes[carte].id}}
+                    <div class="hand" id="{{cartes[carte].Id}}">
+                        <img src="{{ asset('assets/images/objets/objet_'~cartes[carte].Id~'.png')}}" height="100%" />{{ cartes[carte].id}}
                     </div>
                 {% endfor %}
             {% endif %}
-		</div>
+        </div>
 
-		<div class="baguette">
-			<img src="{{asset('assets/images/plateau/baguette.svg')}}">
-		</div>
+        <div class="baguette">
+            <img src="{{asset('assets/images/plateau/baguette.svg')}}">
+        </div>
 
-		<div class="contain_chat">
-			<div class="contain_chat_in">
-				<div class="open_chat">
-					<div class="button_open_chat"></div>
-				</div>
-				<div class="chat_right">
-					<div class="chat">
-						<h1>CHAT</h1>
+        <div class="contain_chat">
+            <div class="contain_chat_in">
+                <div class="open_chat">
+                    <div class="button_open_chat"><img src="{{asset('assets/images/plateau/bouton.svg')}}"></div>
+                </div>
+                <div class="chat_right">
+                    <div class="chat">
+                        <h1>CHAT</h1>
 
-						<div class="publish"><div class="round"></div>User 1 : <p> message</p></div>
+                        <div class="publish"><div class="round"></div>User 1 : <p> message</p></div>
 
-						<div class="publish"><div class="round"></div>User 1 : <p> message</p></div>
+                        <div class="publish"><div class="round"></div>User 1 : <p> message</p></div>
 
-						<div class="publish_me"><div class="round"></div>User 1 : <p> message</p></div>
+                        <div class="publish_me"><div class="round"></div>User 1 : <p> message</p></div>
 
-						<div class="publish"><div class="round"></div> <p>User 1 : message de type trètype trètype très très azer </p></div>
-			
-					</div>
-					<div class="input">
-						<form>
-							<textarea placeholder="Ecriver votre message.."></textarea>
-							<input type="submit" id="send">
-						</form> 
-					</div>
-				</div>
-			</div>
-		</div>
+                        <div class="publish"><div class="round"></div> <p>User 1 : message de type trètype trètype très très azer </p></div>
+            
+                    </div>
+                    <div class="input">
+                        <form>
+                            <textarea placeholder="Ecriver votre message.."></textarea>
+                            <input type="submit" id="send">
+                        </form> 
+                    </div>
+                </div>
+            </div>
+        </div>
 
-		<img src="{{asset('assets/images/plateau/plateau.jpg')}}" width="100%">
-	</div>
-	{% endblock %}
-	{% block javascripts %}
-	<script>
-		$(document).ready(function(){
-			rotate();
-			function rotate(){
-				$('#m1').css({'transform':'rotateY(180deg)','transition-delay':'1s'});
-				$('#m2').css({'transform':'rotateY(180deg)','transition-delay':'1.1s'});
-				$('#m3').css({'transform':'rotateY(180deg)','transition-delay':'1.2s'});
-				$('#m4').css({'transform':'rotateY(180deg)','transition-delay':'1.3s'});
-				$('#m5').css({'transform':'rotateY(180deg)','transition-delay':'1.4s'});
-				$('#m6').css({'transform':'rotateY(180deg)','transition-delay':'1.5s'});
-				$('#m7').css({'transform':'rotateY(180deg)','transition-delay':'1.6s'});
-			}
-
-			$('.button_open_chat').click(function(){
-				$('.contain_chat_in').toggleClass('is_open');
-			});
-		});
-	</script>
-{% endblock %}
+        <img src="{{asset('assets/images/plateau/plateau.jpg')}}" width="100%">
+    </div>
+    {% endblock %}
+    {% block javascripts %}{% endblock %}

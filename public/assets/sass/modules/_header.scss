@@ -1,0 +1,16 @@
+.header {
+	.header-bg {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		background: url('../images/header-bg.jpg') no-repeat center;
+		background-size: cover;
+		height: 100vh;
+		a {
+			position: absolute;
+			text-decoration: none;
+			color: #fff;
+			letter-spacing: 3px;
+		}
+	}
+}

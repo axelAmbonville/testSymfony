@@ -1,0 +1,37 @@
+.btn {
+	position: absolute;
+	top: 85%;
+	left: 60%;
+	transform: translate(-50%, -50%) skew(-20deg);
+	a {
+		display: block;
+		transform: skew(20deg);
+		text-decoration: none;
+		@include media-breakpoint-up(xs) {
+			padding: .8rem;
+			font-size: 25%;
+		}
+		@include media-breakpoint-up(sm) {
+			padding: 1rem;
+			font-size: 35%;
+		}
+		@include media-breakpoint-up(xl) {
+			padding: 1.5rem;
+			@include font-size(1.4);
+		}
+	}
+}
+
+.btn-white {
+	background-color: #fff;
+	a {
+		color: #000;
+	}
+}
+
+.btn-black {
+	background-color: #000;
+	a {
+		color: #fff;
+	}
+}

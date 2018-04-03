@@ -1,0 +1,41 @@
+* {
+	@include box-sizing(border-box);
+}
+
+html {
+	font-size: 62.5%;
+	@include antialiasing();
+}
+
+body {
+	@extend %font-roboto;
+	@include font-size(2.4);
+	font-weight: 700;
+	color: #fff;
+}
+h2 {
+	text-transform: uppercase;
+}
+h3 {
+	@include font-size(3.6);
+	letter-spacing: .3rem;
+	text-transform: uppercase;
+}
+a {
+	text-transform: uppercase;
+}
+
+p {
+	@include font-size(1.6);
+}
+
+.embed-responsive {
+	position: relative;
+	display: block;
+	padding: 0;
+	overflow: hidden;
+}
+
+.text-center {
+	text-align: center;
+}

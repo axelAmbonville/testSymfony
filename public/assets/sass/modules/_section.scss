@@ -1,0 +1,189 @@
+.section-gradient {
+	background: linear-gradient(#000000, #b50404);
+}
+// SECTION tuto
+.section-tuto {
+	padding-bottom: 6.6rem;
+	@include media-breakpoint-up(xs) {
+		padding-top: 9rem;
+	}
+	@include media-breakpoint-up(sm) {
+		padding-top: 13rem;
+	}
+	@include media-breakpoint-up(md) {
+		padding-top: 17rem;
+	}
+	h3 {
+		padding-bottom: 6.6rem;
+		@include media-breakpoint-up(xs) {
+			font-size: 75%;
+		}
+		@include media-breakpoint-up(sm) {
+			font-size: 100%;
+		}
+		@include media-breakpoint-up(md) {
+			font-size: 110%;
+		}
+		@include media-breakpoint-up(lg) {
+			font-size: 125%;
+		}
+		@include media-breakpoint-up(xl) {
+			font-size: 150%;
+		}
+	}
+}
+
+//SECTION Join
+.section-join-bg {
+	background: url('../images/section-join-bg.png') no-repeat center;
+	background-size: cover;
+	height: 100%;
+}
+.shinobi-join {
+	margin-bottom: -22%;
+	margin-top: 40%;
+}
+
+.section-join-l1 {
+	position: relative;
+	z-index: 2;
+	h2 {
+		margin-left: 62%;
+		position: absolute;
+		top: 30%;
+		left: 0%;
+		transform: translateY(-30%);
+		letter-spacing: .4rem;
+		white-space: pre-line;
+		@include media-breakpoint-up(xs) {
+			font-size: 70%;
+			@include line-height(2.7);
+		}
+		@include media-breakpoint-up(sm) {
+			font-size: 120%;
+			@include line-height(4.2);
+		}
+		@include media-breakpoint-up(xl) {
+			@include font-size(4.2);
+			@include line-height(6.5);
+		}
+		span {
+			padding-left: 13%;
+			white-space: nowrap;
+		}
+	}
+	@include media-breakpoint-down(sm) {
+		margin-bottom: 8rem;
+	}
+}
+
+.section-join-l2 {
+	margin-top: -4rem;
+}
+
+.section-join-packaging {
+	position: absolute;
+	top: 45%;
+	left: 63%;
+	transform: translate(-50%, -50%);
+}
+
+//SECTION Invit
+.section-invit {
+	padding-top: 17rem;
+}
+
+.section-invit-l1 {
+	margin-top: -4rem;
+}
+
+.section-invit-l2 {
+	position: relative;
+	h2 {
+		position: absolute;
+		top: 30%;
+		left: 0%;
+		transform: translateY(-30%);
+		@include font-size(7.2);
+		@include line-height(10);
+		letter-spacing: .4rem;
+		white-space: pre-line;
+		@include media-breakpoint-up(xs) {
+			font-size: 70%;
+			@include line-height(2.7);
+		}
+		@include media-breakpoint-up(sm) {
+			font-size: 120%;
+			@include line-height(4.2);
+		}
+		@include media-breakpoint-up(xl) {
+			@include font-size(4.2);
+			@include line-height(6.5);
+		}
+		span {
+			padding-left: 4rem;
+			white-space: nowrap;
+		}
+	}
+	@include media-breakpoint-down(sm) {
+		margin-bottom: 8rem;
+	}
+}
+
+.shinobi-invit {
+	margin-bottom: -45%;
+}
+
+.section-invit-flyer {
+	position: absolute;
+	top: 48%;
+	left: 48%;
+	transform: translate(-50%, -50%);
+}
+
+//SECTION Tournament
+.section-tournament-bg {
+	background: url('../images/section-tournament-bg.png') no-repeat center;
+	background-size: cover;
+	height: 100%;
+}
+.section-tournament {
+	padding-top: 15rem;
+	padding-bottom: 30rem;
+}
+.section-tournament-l1 {
+	position: relative;
+}
+.section-tournament-l2 {
+	position: absolute;
+	margin-top: 7%;
+	@include media-breakpoint-down(sm) {
+		margin-top: 20%;
+	}
+	h2 {
+		color: #000;
+		margin-left: 45%;
+		position: absolute;
+		top: 30%;
+		left: 0%;
+		transform: translateY(-30%);
+		letter-spacing: .4rem;
+		white-space: pre-line;
+		@include media-breakpoint-up(xs) {
+			font-size: 70%;
+			@include line-height(2.7);
+		}
+		@include media-breakpoint-up(sm) {
+			font-size: 120%;
+			@include line-height(4.2);
+		}
+		@include media-breakpoint-up(xl) {
+			@include font-size(4.2);
+			@include line-height(6.5);
+		}
+		span {
+			padding-left: 13%;
+			white-space: nowrap;
+		}
+	}
+}

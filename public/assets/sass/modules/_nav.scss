@@ -1,0 +1,115 @@
+.header-nav {
+	position: relative;
+	background-color: #000;
+	padding-top: 1%;
+	padding-bottom: 1%;
+}
+
+.header-menu {
+	@include media-breakpoint-up(xs) {
+		flex-direction: column;
+		visibility: hidden;
+		height: 0px;
+	}
+	@include media-breakpoint-up(sm) {
+		visibility: visible;
+		flex-direction: row;
+		height: auto;
+	}
+	a {
+		position: relative;
+		color: #fff;
+		letter-spacing: 3px;
+		text-decoration: none;
+		text-transform: uppercase;
+		&:hover,
+		&:focus,
+		&:active {
+			margin-bottom: 1.5rem;
+			padding-bottom: .5rem;
+			&:last-child {
+				margin-bottom: 0;
+				margin-top: 1.5rem;
+				@include media-breakpoint-up(sm) {
+					margin-top: 0;
+				}
+			}
+			@include media-breakpoint-up(sm) {
+				margin-bottom: 0;	
+			}
+		}
+		&:hover:after,
+        &:focus:after,
+        &:active:after {
+           width: 100%;
+         }
+         &:after {
+          content: '';
+          color: #fff;
+          position: absolute;
+          bottom: 0;
+          left: 50%;
+          width: 0%;
+          transform: translateX(-50%);
+          height: .1875rem;
+          background: #fff;
+          transition: .35s;
+        }
+        @include media-breakpoint-up(sm) {
+        	@include font-size(1.6);
+        }
+        @include media-breakpoint-up(lg) {
+        	@include font-size(2);
+        }
+		@include media-breakpoint-up(xl) {
+			@include font-size(2);
+		}
+	}
+}
+
+.header-menu.active {
+	@include media-breakpoint-up(xs) {
+		flex-direction: column;
+		visibility: visible;
+		height: auto;
+	}
+}
+
+// Menu burger
+#burger{
+    cursor:pointer;
+    display:block;
+    @include media-breakpoint-up(sm) {
+		display: none;
+	}
+}
+
+
+#burger span{
+    background: #fff;
+    display:block;
+    width:35px;
+    height:3px;
+    margin-bottom: 5px;
+    position: relative;
+    top:0;
+    transition: all ease-in-out 0.4s;  
+}
+
+#burger-container.open span:nth-child(2),
+#burger-container.open span:nth-child(3){
+    width: 0;
+    opacity:0;
+    
+}
+
+#burger-container.open span:nth-child(1){
+
+    transform: rotate(-45deg);
+    top:12px;
+}
+
+#burger-container.open span:nth-child(4){
+    transform: rotate(45deg);
+    top:-12px;
+}

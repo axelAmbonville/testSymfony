@@ -35,7 +35,7 @@
 	height: 100%;
 	width: 100%;
 	position: absolute;
-	display: none;
+	display: flex;
 }
 .act_left{
 	width: 70%;
@@ -55,16 +55,17 @@
 	align-items: center;
 	justify-content: center;
 }
-.valid button{
-	width: 50%;
+.valid button,input{
 	height: 100%;
 	border-radius: 8px;
-
 }
 .emplacement{
 	height: 90%;
 	width: 27%;
 	border:dashed 2px white;
+}
+#empl4_3 .hand_selected:nth-child(2){
+	display: none;
 }
 .action4 .emplacement {
     height: 76%;
@@ -85,6 +86,9 @@
 }
 .carte{
 	height: 100%;
+	position: absolute;
+	width: 100%;
+	left: -153%;
 }
 
 .cartes_maitres{
@@ -103,6 +107,10 @@
 	transition: 0.55s;
 	transform-style: preserve-3d;
 	perspective: 1200px;
+}
+#send{
+	visibility: hidden;
+	position: absolute;
 }
 .actions{
 	display: flex;
@@ -146,6 +154,9 @@
 	z-index: 100;
 	cursor:pointer;
 }
+.hand_selected{
+	height: 90%;
+}
 .actions img:hover,.actions_adverses img:hover{
 	transition: 0.55s;
 	transform: scale(1.5);
@@ -179,7 +190,7 @@
 	width: 22%;
 	height: 99.5%;
 	overflow: hidden;
-
+	z-index: 100;
 }
 .contain_chat_in{
 	height: 100%;
@@ -197,6 +208,9 @@
 	display: flex;
 	align-items: center;
 }
+.act_left .main:hover{
+	transform: scale(0);
+}
 .is_open{
 	right: 0%;
 	
@@ -204,11 +218,11 @@
 .button_open_chat{
 	height: 20%;
 	width: 100%;
-	background: red;
-}
-.button_open_chat{
+	display: flex;
+	align-items: center;
 	cursor: pointer;
 }
+
 .chat_right{
 	width: 85%;
 	height:100%;
@@ -267,15 +281,19 @@
 	overflow: hidden;
 	text-align: center;
 }
-/*form input{
+.chat form input{
 	visibility: hidden;
-}*/
-form textarea{
+}
+.chat form textarea{
 	height: 66%;
     width: 89%;
     background-color: black;
     border: 2px solid white;
     color: white;
+}
+.input textarea{
+	    width: 88%;
+    height: 80%;
 }
 
 @keyframes anim{
@@ -315,5 +333,9 @@ form textarea{
 	.is_open {
     right: 0%;
 }
+}
+
+.is_not_clickable{
+	display: none;
 }
 
