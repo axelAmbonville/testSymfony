@@ -19,6 +19,7 @@ class AdminController extends Controller
      */
     public function admin()
     {
-        return $this->render('admin/admin.html.twig');
+        $joueurs = $this->getDoctrine()->getRepository('App:User')->findAll();
+        return $this->render('admin/admin.html.twig', ['joueurs'=> $joueurs]);
     }
 }

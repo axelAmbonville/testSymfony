@@ -3,6 +3,42 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, user-scalable=no">
+        {% if app.user.id != partie.tour.id %}
+            {% if app.user.id == partie.j1_id %}
+                {% if partie.actions_j2.cadeau.etat ==1 or  partie.actions_j2.concurrence.etat ==1%}
+                {% else %}
+                    <meta http-equiv="refresh" content="7">
+                {% endif %}
+            {% endif %}
+            {% if app.user.id == partie.j2_id %}
+                {% if partie.actions_j1.cadeau.etat ==1 or  partie.actions_j1.concurrence.etat ==1%}
+                {% else %}
+                    <meta http-equiv="refresh" content="7">
+                {% endif %}
+            {% endif %}
+        {% endif %}
+
+        {% if app.user.id ==partie.tour.id %}
+
+            {% if app.user.id == partie.j1_id %}
+                {% if partie.actions_j1.cadeau.etat == 1%}
+                    <meta http-equiv="refresh" content="7">
+                {% endif %}
+                {% if partie.actions_j1.concurrence.etat == 1%}
+                    <meta http-equiv="refresh" content="7">
+                {% endif %}
+            {% endif %}
+
+            {% if app.user.id == partie.j2_id %}
+                {% if partie.actions_j2.cadeau.etat == 1%}
+                    <meta http-equiv="refresh" content="7">
+                {% endif %}
+                {% if partie.actions_j2.concurrence.etat == 1%}
+                    <meta http-equiv="refresh" content="7">
+                {% endif %}
+            {% endif %}
+
+        {% endif %}
         <title>{% block title %}Game - Shinobi{% endblock %}</title>
         
         <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.css') }}"/>

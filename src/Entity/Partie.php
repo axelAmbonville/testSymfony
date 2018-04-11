@@ -129,11 +129,11 @@ class Partie
     }
 
     function getCarte_placed_j1() {
-        return $this->carte_placed_j1;
+        return (array) json_decode($this->carte_placed_j1);
     }
 
     function getCarte_placed_j2() {
-        return $this->carte_placed_j2;
+        return (array) json_decode($this->carte_placed_j2);
     }
 
     function getScore_j1() {

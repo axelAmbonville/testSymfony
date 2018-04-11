@@ -3,49 +3,69 @@
     <h3>Affichage de la partie - ID : {{partie.id}}</h3>
     <p>Manche : {{partie.manche}}</p>
     <p>Tour : {{partie.tour.username}}</p>
-    {%if app.user.id == partie.tour.id%}
-                            {%if true %}
-                                <form method="POST" action="{{ path('action_secret', {'id':partie.id})}}">
-                                    <input type="text" name="idCarte" placeholder="Donner l'ID de la carte">
-                                    <input type="submit" name="secret" value="Secret">
-                                </form>
-                            {% endif %}
-                            <br/>
-                            {%if true %}
-                                <form method="POST" action="{{ path('action_cadeau', {'id':partie.id})}}">
-                                    <input type="text" name="idCarte1" placeholder="Donner l'ID de la carte">
-                                    <input type="text" name="idCarte2" placeholder="Donner l'ID de la carte">
-                                    <input type="text" name="idCarte3" placeholder="Donner l'ID de la carte">
-                                    <input type="submit" name="cadeau" value="Cadeau">
-                                </form>
-                             {% endif %}
-                        {% endif %}
-                        {%if app.user.id != partie.tour.id%}
-                            Ce n'est pas à votre tour de jouer!
-                        {% endif %}
 
     <div class="plateau">
         <div class="actions_adverses">
             {%if app.user.id == partie.j1_id%}
                                 <div class="actions_adverses_top"><!--Actions J2 a afficher-->
-                                    <img src="{{ asset('assets/images/plateau/jetons_action1.png')}}" height="100%" title="Action 1 : Secret">
-                                    <img src="{{ asset('assets/images/plateau/jetons_action2.png')}}" height="100%" title="Action 2 : Dissimulation">
+                                    {% if partie.actions_j2.secret.etat != 0 %}
+                                        <img src="{{ asset('assets/images/plateau/jetons_action1.png')}}" style="filter: grayscale(100%);" height="100%" title="Action 1 : Secret">
+                                    {% endif%}
+                                    {% if partie.actions_j2.secret.etat == 0 %}
+                                        <img src="{{ asset('assets/images/plateau/jetons_action1.png')}}" height="100%" title="Action 1 : Secret">
+                                    {% endif %}
+                                    {% if partie.actions_j2.dissimulation.etat != 0 %}
+                                    <img src="{{ asset('assets/images/plateau/jetons_action2.png')}}" style="filter: grayscale(100%);" height="100%" title="Action 2 : Dissimulation">
+                                    {% endif%}
+                                    {% if partie.actions_j2.dissimulation.etat == 0 %}
+                                        <img src="{{ asset('assets/images/plateau/jetons_action2.png')}}" height="100%" title="Action 2 : Dissimulation">
+                                    {% endif%}
                                 </div>
                                 <div class="actions_adverses_bot">
-                                    <img src="{{ asset('assets/images/plateau/jetons_action3.png')}}" height="100%" title="Action 3 : Cadeau">
-                                    <img src="{{ asset('assets/images/plateau/jetons_action4.png')}}" height="100%" title="Action 4 : Concurrence">
+                                    {% if partie.actions_j2.cadeau.etat != 0 %}
+                                    <img src="{{ asset('assets/images/plateau/jetons_action3.png')}}" style="filter: grayscale(100%);" height="100%" title="Action 3 : Cadeau">
+                                    {% endif%}
+                                    {% if partie.actions_j2.cadeau.etat == 0 %}
+                                        <img src="{{ asset('assets/images/plateau/jetons_action3.png')}}" height="100%" title="Action 3 : Cadeau">
+                                    {% endif%}
+                                    {% if partie.actions_j2.concurrence.etat != 0 %}
+                                    <img src="{{ asset('assets/images/plateau/jetons_action4.png')}}" style="filter: grayscale(100%);" height="100%" title="Action 4 : Concurrence">
+                                    {% endif%}
+                                    {% if partie.actions_j2.concurrence.etat == 0 %}
+                                        <img src="{{ asset('assets/images/plateau/jetons_action4.png')}}" height="100%" title="Action 4 : Concurrence">
+                                    {% endif%}
                                 </div>
-                            {% endif %}
-                            {%if app.user.id == partie.j2_id%}
+            {% endif %}
+            {%if app.user.id == partie.j2_id%}
                                 <div class="actions_adverses_top"><!--Actions J1 a afficher-->
-                                    <img src="{{ asset('assets/images/plateau/jetons_action1.png')}}" height="100%" title="Action 1 : Secret">
-                                    <img src="{{ asset('assets/images/plateau/jetons_action2.png')}}" height="100%" title="Action 2 : Dissimulation">
+                                    {% if partie.actions_j1.secret.etat != 0 %}
+                                        <img src="{{ asset('assets/images/plateau/jetons_action1.png')}}" style="filter: grayscale(100%);" height="100%" title="Action 1 : Secret">
+                                    {% endif%}
+                                    {% if partie.actions_j1.secret.etat == 0 %}
+                                        <img src="{{ asset('assets/images/plateau/jetons_action1.png')}}" height="100%" title="Action 1 : Secret">
+                                    {% endif %}
+                                    {% if partie.actions_j1.dissimulation.etat != 0 %}
+                                    <img src="{{ asset('assets/images/plateau/jetons_action2.png')}}" style="filter: grayscale(100%);" height="100%" title="Action 2 : Dissimulation">
+                                    {% endif%}
+                                    {% if partie.actions_j1.dissimulation.etat == 0 %}
+                                        <img src="{{ asset('assets/images/plateau/jetons_action2.png')}}" height="100%" title="Action 2 : Dissimulation">
+                                    {% endif%}
                                 </div>
                                 <div class="actions_adverses_bot">
-                                    <img src="{{ asset('assets/images/plateau/jetons_action3.png')}}" height="100%" title="Action 3 : Cadeau">
-                                    <img src="{{ asset('assets/images/plateau/jetons_action4.png')}}" height="100%" title="Action 4 : Concurrence">
+                                    {% if partie.actions_j1.cadeau.etat != 0 %}
+                                    <img src="{{ asset('assets/images/plateau/jetons_action3.png')}}" style="filter: grayscale(100%);" height="100%" title="Action 3 : Cadeau">
+                                    {% endif%}
+                                    {% if partie.actions_j1.cadeau.etat == 0 %}
+                                        <img src="{{ asset('assets/images/plateau/jetons_action3.png')}}" height="100%" title="Action 3 : Cadeau">
+                                    {% endif%}
+                                    {% if partie.actions_j1.concurrence.etat != 0 %}
+                                    <img src="{{ asset('assets/images/plateau/jetons_action4.png')}}" style="filter: grayscale(100%);" height="100%" title="Action 4 : Concurrence">
+                                    {% endif%}
+                                    {% if partie.actions_j1.concurrence.etat == 0 %}
+                                        <img src="{{ asset('assets/images/plateau/jetons_action4.png')}}" height="100%" title="Action 4 : Concurrence">
+                                    {% endif%}
                                 </div>
-                            {% endif %}
+            {% endif %}
         </div>
         <div class="actions_joueur">
             <div id="action1" class="act">
@@ -56,11 +76,11 @@
                 </div>
                 <div class="act_right">
                     <div class="valid">
-                        <form method="" action="">
-                            <input id="input1" name="envois" type="hidden">
-                            <input type="submit" value="OK">
+                        <form method="POST" action="{{path('action_secret', {'id': partie.id})}}">
+                            <input id="input1" name="idCarte" type="hidden">
+                            <input type="submit" id="sub1" value="">
                         </form>
-                            <button class="cancel">ANNULER</button>
+                            <button class="cancel"></button>
                     </div>
                 </div>
             </div>
@@ -71,12 +91,12 @@
                 </div>
                 <div class="act_right">
                     <div class="valid">
-                        <form method="" action="">
-                            <input id="input2_1" name="envois1" type="hidden">
-                            <input id="input2_2" name="envois2" type="hidden">
-                            <input type="submit" value="OK">
+                        <form method="POST" action="{{path('action_dissimulation', {'id': partie.id})}}">
+                            <input id="input2_1" name="idCarte1" type="hidden">
+                            <input id="input2_2" name="idCarte2" type="hidden">
+                            <input type="submit" id="sub2" value="">
                         </form>
-                        <button class="cancel">ANNULER</button>
+                        <button class="cancel"></button>
                     </div>
                 </div>
             </div>
@@ -88,13 +108,13 @@
                 </div>
                 <div class="act_right">
                     <div class="valid">
-                        <form method="" action="">
-                            <input id="input3_1" name="envois1" type="hidden">
-                            <input id="input3_2" name="envois2" type="hidden">
-                            <input id="input3_3" name="envois3" type="hidden">
-                            <input type="submit" value="OK">
+                        <form method="POST" action="{{path('action_cadeau', {'id': partie.id})}}">
+                            <input id="input3_1" name="idCarte1" type="hidden">
+                            <input id="input3_2" name="idCarte2" type="hidden">
+                            <input id="input3_3" name="idCarte3" type="hidden">
+                            <input type="submit" id="sub3" value="">
                         </form>
-                        <button class="cancel">ANNULER</button>
+                        <button class="cancel"></button>
                     </div>
                 </div>
             </div>
@@ -107,64 +127,206 @@
                 </div>
                 <div class="act_right">
                     <div class="valid">
-                        <form method="" action="">
-                            <input id="input4_1" name="envois1" type="hidden">
-                            <input id="input4_2" name="envois2" type="hidden">
-                            <input id="input4_3" name="envois3" type="hidden">
-                            <input id="input4_4" name="envois4" type="hidden">
-                            <input type="submit" value="OK">
+                        <form method="POST" action="{{path('action_concurrence', {'id': partie.id})}}">
+                            <input id="input4_1" name="idCarte1" type="hidden">
+                            <input id="input4_2" name="idCarte2" type="hidden">
+                            <input id="input4_3" name="idCarte3" type="hidden">
+                            <input id="input4_4" name="idCarte4" type="hidden">
+                            <input type="submit" id="sub4" value="">
                         </form>
-                        <button class="cancel">ANNULER</button>
+                        <button class="cancel"></button>
                     </div>
                 </div>
-            </div> 
+            </div>
+           {% if app.user.id == partie.j1_id %}
+               {% if partie.actions_j2.cadeau.etat == 1 %}
+                   <form method="POST" action="{{path('action_cadeau_rep', {'id': partie.id})}}">
+                        <div class="main_user">
+                            {% for carte in partie.actions_j2.cadeau.cartes %}
+                                    <img  src="{{ asset('assets/images/objets/objet_'~cartes[carte].Id~'.png')}}" height="100%" />
+                                    <input type="radio" value="{{cartes[carte].Id}}" name="idCarte">
+                            {% endfor %}
+                            <input type="submit" value="OK"/>
+                        </div>
+                   </form>
+               {% endif %}
+               {% if partie.actions_j2.concurrence.etat == 1 %}
+                   <form method="POST" action="{{ path('action_concurrence_rep', {'id':partie.id}) }}">
+                        {% for carte in partie.actions_j2.concurrence.cartes.duo1 %}
+                            <img  src="{{ asset('assets/images/objets/objet_'~cartes[carte].Id~'.png')}}" height="100%" />
+                        {% endfor %}
+                       <input type="radio" value="duo1" name="idDuo">
+                       {% for carte in partie.actions_j2.concurrence.cartes.duo2 %}
+                           <img  src="{{ asset('assets/images/objets/objet_'~cartes[carte].Id~'.png')}}" height="100%" />
+                       {% endfor %}
+                       <input type="radio" value="duo2" name="idDuo">
+                       <input type="submit" value="OK"/>
+                   </form>
+               {% endif %}
+           {% endif %}
+           {% if app.user.id == partie.j2_id %}
+               {% if partie.actions_j1.cadeau.etat == 1 %}
+                   <form method="POST" action="{{path('action_cadeau_rep', {'id': partie.id})}}">
+                        <div class="main_user">
+                            {% for carte in partie.actions_j1.cadeau.cartes %}
+                                    <img  src="{{ asset('assets/images/objets/objet_'~cartes[carte].Id~'.png')}}" height="100%" />
+                                    <input type="radio" value="{{cartes[carte].Id}}" name="idCarte">
+                            {% endfor %}
+                            <input type="submit" value="OK"/>
+                        </div>
+                   </form>
+               {% endif %}
+               {% if partie.actions_j1.concurrence.etat == 1 %}
+                <form method="POST" action="{{ path('action_concurrence_rep', {'id':partie.id}) }}">
+                   {% for carte in partie.actions_j1.concurrence.cartes.duo1 %}
+                       <img  src="{{ asset('assets/images/objets/objet_'~cartes[carte].Id~'.png')}}" height="100%" />
+                   {% endfor %}
+                   <input type="radio" value="duo1" name="idDuo">
+                   {% for carte in partie.actions_j1.concurrence.cartes.duo2 %}
+                       <img  src="{{ asset('assets/images/objets/objet_'~cartes[carte].Id~'.png')}}" height="100%" />
+                   {% endfor %}
+                   <input type="radio" value="duo2" name="idDuo">
+                   <input type="submit" value="OK"/>
+                </form>
+               {% endif %}
+           {% endif %}
         </div>
         <div class="deck">
             <div class="carte">
-                            <img src="{{ asset('assets/images/plateau/background.png')}}" height="100%">
+
                 {% for carte in partie.pioche %}
                             {{cartes[carte].Id}}
                         {% endfor %}
             </div>
         </div>
+        {% if app.user.id == partie.j1_id %}
+            {% for key,value in partie.Carte_placed_j2 %}
+                {{ key }} : {{ value }}
+            {% endfor %}
+        {% endif %}
+        {% if app.user.id == partie.j2_id %}
+            {% for key, value in partie.Carte_placed_j1 %}
+                {{ key }} : {{ value }}
+            {% endfor %}
+        {% endif %}
         <div class="cartes_maitres">
             {% for key,value in partie.objectifs %}
-                <div class="maitres" id="m{{key}}">
-                    <img class="face_vosible" src="{{ asset('assets/images/maitres/maitre_'~key~'.svg')}}" height="100%">
+                <div class="maitres" id="{{key}}">
+                    <img class="face_vosible" src="{{ asset('assets/images/maitres/'~key~'.svg')}}" height="100%">
                     <img class="couverture" src="{{ asset('assets/images/plateau/background.png')}}" height="100%">{{value}}
                 </div>
             {% endfor %}
         </div>
+        {% if app.user.id == partie.j1_id %}
+            {% for key, value in partie.Carte_placed_j1 %}
+                {{ key }} : {{ value }}
+            {% endfor %}
+        {% endif %}
+        {% if app.user.id == partie.j2_id %}
+            {% for key, value in partie.Carte_placed_j2 %}
+                {{ key }} : {{ value }}
+            {% endfor %}
+        {% endif %}
         <div class="actions">
             {%if app.user.id == partie.tour.id%}
-                <div class="actions_top">
-                    <img src="{{ asset('assets/images/plateau/jetons_action1.png')}}" id="act1" class="act_click" height="100%" title="Action 1 : Secret">
-                    <img src="{{ asset('assets/images/plateau/jetons_action2.png')}}" id="act2" class="act_click" height="100%" title="Action 2 : Dissimulation">
-                </div>
-                <div class="actions_bot">
-                    <img src="{{ asset('assets/images/plateau/jetons_action3.png')}}" id="act3" class="act_click" height="100%" title="Action 3 : Cadeau">
-                    <img src="{{ asset('assets/images/plateau/jetons_action4.png')}}" id="act4" class="act_click" height="100%" title="Action 4 : Concurrence">
-                </div>
+                    {%if app.user.id == partie.j1_id%}
+                        {%if partie.actions_j1.cadeau.etat != 1%}
+                            {%if partie.actions_j1.concurrence.etat != 1%}
+                                <div class="actions_top">
+                                    {% if partie.actions_j1.secret.etat != 0 %}
+                                        <img src="{{ asset('assets/images/plateau/jetons_action1.png')}}" id="act1" style="filter: grayscale(100%);" height="100%" title="Action 1 : Secret">
+                                    {% endif%}
+                                    {% if partie.actions_j1.secret.etat == 0 %}
+                                        <img src="{{ asset('assets/images/plateau/jetons_action1.png')}}" id="act1" class="act_click" height="100%" title="Action 1 : Secret">
+                                    {% endif %}
+                                    {% if partie.actions_j1.dissimulation.etat != 0 %}
+                                    <img src="{{ asset('assets/images/plateau/jetons_action2.png')}}" id="act2" style="filter: grayscale(100%);" height="100%" title="Action 2 : Dissimulation">
+                                    {% endif%}
+                                    {% if partie.actions_j1.dissimulation.etat == 0 %}
+                                        <img src="{{ asset('assets/images/plateau/jetons_action2.png')}}" id="act2" class="act_click" height="100%" title="Action 2 : Dissimulation">
+                                    {% endif%}
+                                </div>
+                                <div class="actions_bot">
+                                    {% if partie.actions_j1.cadeau.etat != 0 %}
+                                    <img src="{{ asset('assets/images/plateau/jetons_action3.png')}}" id="act3" style="filter: grayscale(100%);" height="100%" title="Action 3 : Cadeau">
+                                    {% endif%}
+                                    {% if partie.actions_j1.cadeau.etat == 0 %}
+                                        <img src="{{ asset('assets/images/plateau/jetons_action3.png')}}" id="act3" class="act_click" height="100%" title="Action 3 : Cadeau">
+                                    {% endif%}
+                                    {% if partie.actions_j1.concurrence.etat != 0 %}
+                                    <img src="{{ asset('assets/images/plateau/jetons_action4.png')}}" id="act4" style="filter: grayscale(100%);" height="100%" title="Action 4 : Concurrence">
+                                    {% endif%}
+                                    {% if partie.actions_j1.concurrence.etat == 0 %}
+                                        <img src="{{ asset('assets/images/plateau/jetons_action4.png')}}" id="act4" class="act_click" height="100%" title="Action 4 : Concurrence">
+                                    {% endif%}
+                                </div>
+                            {% endif %}
+                        {% endif %}
+                        {% if partie.actions_j1.cadeau.etat == 1 or partie.actions_j1.concurrence.etat == 1 %}
+                            En attente de la réponse de l'autre joueur!
+                        {% endif %}
+                    {% endif %}
+                    {%if app.user.id == partie.j2_id%}
+                        {%if partie.actions_j2.cadeau.etat != 1%}
+                            {%if partie.actions_j2.concurrence.etat != 1%}
+                                <div class="actions_top">
+                                    {% if partie.actions_j2.secret.etat != 0 %}
+                                        <img src="{{ asset('assets/images/plateau/jetons_action1.png')}}" id="act1" style="filter: grayscale(100%);" height="100%" title="Action 1 : Secret">
+                                    {% endif%}
+                                    {% if partie.actions_j2.secret.etat == 0 %}
+                                        <img src="{{ asset('assets/images/plateau/jetons_action1.png')}}"id="act1" class="act_click" height="100%" title="Action 1 : Secret">
+                                    {% endif %}
+                                    {% if partie.actions_j2.dissimulation.etat != 0 %}
+                                    <img src="{{ asset('assets/images/plateau/jetons_action2.png')}}" id="act2" style="filter: grayscale(100%);" height="100%" title="Action 2 : Dissimulation">
+                                    {% endif%}
+                                    {% if partie.actions_j2.dissimulation.etat == 0 %}
+                                        <img src="{{ asset('assets/images/plateau/jetons_action2.png')}}" id="act2" class="act_click" height="100%" title="Action 2 : Dissimulation">
+                                    {% endif%}
+                                </div>
+                                <div class="actions_bot">
+                                    {% if partie.actions_j2.cadeau.etat != 0 %}
+                                    <img src="{{ asset('assets/images/plateau/jetons_action3.png')}}" id="act3" style="filter: grayscale(100%);" height="100%" title="Action 3 : Cadeau">
+                                    {% endif%}
+                                    {% if partie.actions_j2.cadeau.etat == 0 %}
+                                        <img src="{{ asset('assets/images/plateau/jetons_action3.png')}}" id="act3" class="act_click" height="100%" title="Action 3 : Cadeau">
+                                    {% endif%}
+                                    {% if partie.actions_j2.concurrence.etat != 0 %}
+                                    <img src="{{ asset('assets/images/plateau/jetons_action4.png')}}" id="act4" style="filter: grayscale(100%);" height="100%" title="Action 4 : Concurrence">
+                                    {% endif%}
+                                    {% if partie.actions_j2.concurrence.etat == 0 %}
+                                        <img src="{{ asset('assets/images/plateau/jetons_action4.png')}}" id="act4" class="act_click" height="100%" title="Action 4 : Concurrence">
+                                    {% endif%}
+                                </div>
+                            {% endif %}
+                        {% endif %}
+                        {% if partie.actions_j2.cadeau.etat == 1 or partie.actions_j2.concurrence.etat == 1 %}
+                            En attente de la réponse de l'autre joueur!
+                        {% endif %}
+                    {% endif %}
             {% endif %}
             {%if app.user.id != partie.tour.id%}
                             Ce n'est pas à votre tour de jouer!
-                        {% endif %}
+            {% endif %}
         </div>
         <div class="main_user">
-            {% if app.user.id == partie.j1_id %}
-                {% for carte in partie.Main_j1 %}
-                    <div class="hand" id="{{cartes[carte].Id}}">
-                        <img  src="{{ asset('assets/images/objets/objet_'~cartes[carte].Id~'.png')}}" height="100%" />{{ cartes[carte].id}}
-                    </div>
-                {% endfor %}
+            {% if partie.Main_j1 is not empty %}
+                {% if app.user.id == partie.j1_id %}
+                    {% for carte in partie.Main_j1 %}
+                        <div class="hand" id="{{cartes[carte].Id}}">
+                            <img  src="{{ asset('assets/images/objets/objet_'~cartes[carte].Id~'.png')}}" height="100%" />
+                        </div>
+                    {% endfor %}
+                {% endif %}
             {% endif %}
-                                
-            {% if app.user.id == partie.j2_id %}
-                {% for carte in partie.Main_j2 %}
-                    <div class="hand" id="{{cartes[carte].Id}}">
-                        <img src="{{ asset('assets/images/objets/objet_'~cartes[carte].Id~'.png')}}" height="100%" />{{ cartes[carte].id}}
-                    </div>
-                {% endfor %}
+            
+            {% if partie.Main_j2 is not empty %}
+                {% if app.user.id == partie.j2_id %}
+                    {% for carte in partie.Main_j2 %}
+                        <div class="hand" id="{{cartes[carte].Id}}">
+                            <img src="{{ asset('assets/images/objets/objet_'~cartes[carte].Id~'.png')}}" height="100%" />
+                        </div>
+                    {% endfor %}
+                {% endif %}
             {% endif %}
         </div>
 
@@ -192,7 +354,7 @@
                     </div>
                     <div class="input">
                         <form>
-                            <textarea placeholder="Ecriver votre message.."></textarea>
+                            <textarea id="message" placeholder="Ecriver votre message.."></textarea>
                             <input type="submit" id="send">
                         </form> 
                     </div>
@@ -203,4 +365,46 @@
         <img src="{{asset('assets/images/plateau/plateau.jpg')}}" width="100%">
     </div>
     {% endblock %}
-    {% block javascripts %}{% endblock %}
+    {% block javascripts %}
+        <script>
+        var user = '{{ app.user.username }}';
+        var qui=0;
+        $(document).ready(function(){
+        $(window).keydown(function(event){
+        if(event.keyCode==13){
+        event.preventDefault();
+        if($('#message').val()===""){
+        alert('Le champ est vide !');
+        console.log(message);
+        }
+
+        else{
+        if (qui==0) {
+        $('#send').click(function(e){
+        e.preventDefault();
+        var mess = $('#message').val();
+        var message = '<div class="publish"><div class="round"></div> <p>'+ user +' : ' + mess + '</p></div>';
+        $('.chat').append(message);
+        e.stopImmediatePropagation();
+        document.getElementById("message").value="";
+        });
+        }
+
+        else if(qui==1){
+        $('#send').click(function(e){
+        e.preventDefault();
+        var mess = $('#message').val();
+        var message = '<div class="publish_me"><div class="round"></div> <p>'+ user +' : ' + mess + '</p></div>';
+        $('.chat').append(message);
+        e.stopImmediatePropagation();
+        document.getElementById("message").value="";
+        });
+        }
+
+        $('#send').click();
+        }
+        }
+        });
+        });
+        </script>
+    {% endblock %}

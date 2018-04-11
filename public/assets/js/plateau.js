@@ -1,4 +1,4 @@
-var carte=new Array();
+		var carte=new Array();
 		var distrib_end=0;
 		var compteur=0;
 
@@ -10,8 +10,6 @@ var carte=new Array();
 				$('.contain_chat_in').toggleClass('is_open');
 			});
 			$('.act_click').unbind();
-
-
 			var deck=setInterval(function(){
 				compteur=compteur+1;
 				$('.deck').append('<div class="carte"><img src="/hanamikoji/public/assets/images/plateau/background.png" height="100%"></div>');	
@@ -37,17 +35,18 @@ var carte=new Array();
 			
 
 			function rotate(){
-				$('#m1').css({'transform':'rotateY(180deg)','transition-delay':'1s'});
-				$('#m2').css({'transform':'rotateY(180deg)','transition-delay':'1.1s'});
-				$('#m3').css({'transform':'rotateY(180deg)','transition-delay':'1.2s'});
-				$('#m4').css({'transform':'rotateY(180deg)','transition-delay':'1.3s'});
-				$('#m5').css({'transform':'rotateY(180deg)','transition-delay':'1.4s'});
-				$('#m6').css({'transform':'rotateY(180deg)','transition-delay':'1.5s'});
-				$('#m7').css({'transform':'rotateY(180deg)','transition-delay':'1.6s'});
+				$('#maitre1').css({'transform':'rotateY(180deg)','transition-delay':'1s'});
+				$('#maitre2').css({'transform':'rotateY(180deg)','transition-delay':'1.1s'});
+				$('#maitre3').css({'transform':'rotateY(180deg)','transition-delay':'1.2s'});
+				$('#maitre4').css({'transform':'rotateY(180deg)','transition-delay':'1.3s'});
+				$('#maitre5').css({'transform':'rotateY(180deg)','transition-delay':'1.4s'});
+				$('#maitre6').css({'transform':'rotateY(180deg)','transition-delay':'1.5s'});
+				$('#maitre7').css({'transform':'rotateY(180deg)','transition-delay':'1.6s'});
 			}
 
 			function tour(){
 				if ($('#act1').hasClass('current_power')) {
+
 					//désactiver les autres boutons
 					$('.act_click').hide();
 					//montrer le panneaux d'action
@@ -62,6 +61,7 @@ var carte=new Array();
 						//j'attribue l'id de la carte a la value input du form de l'action en cours
 						var valeur_input = $('#empl1').children().attr('id');
 						$('#input1').val(valeur_input); 
+						$('#sub1').css({'visibility':'visible'});
 					});
 					//au close
 					$('#action1 .cancel').click(function(){
@@ -77,6 +77,7 @@ var carte=new Array();
 								$(this).appendTo('.current_emplacement');
 								$(this).addClass('hand_selected');
 								$(this).removeClass('hand');
+								$('.hand_selected').unbind();
 								var valeur_input = $('#empl2_1').children().attr('id');
 								$('#input2_1').val(valeur_input); 
 								$('.current_emplacement').removeClass('current_emplacement');
@@ -86,6 +87,7 @@ var carte=new Array();
 											$(this).appendTo('.current_emplacement');
 											var valeur_input2 = $('#empl2_2').children().attr('id');
 											$('#input2_2').val(valeur_input2); 
+											$('#sub2').css({'visibility':'visible'});
 											$('#empl2_2').removeClass('current_emplacement');
 											$('#empl2_2').addClass('end_tour');
 												if ($('#empl2_2').hasClass('end_tour')) {
@@ -132,6 +134,7 @@ var carte=new Array();
 													$(this).removeClass('hand');
 													var valeur_input3 = $('#empl3_3').children().attr('id');
 													$('#input3_3').val(valeur_input3);
+													$('#sub3').css({'visibility':'visible'});
 													$('#empl3_3').removeClass('current_emplacement');
 													$('#empl3_3').addClass('end_tour');
 														if ($('#empl3_3').hasClass('end_tour')) {
@@ -188,6 +191,7 @@ var carte=new Array();
 																$(this).removeClass('hand');
 																var valeur_input4 = $('#empl4_4').children().attr('id');
 																$('#input4_4').val(valeur_input4);
+																$('#sub4').css({'visibility':'visible'});
 																$('#empl4_4').removeClass('current_emplacement');
 																$('#empl4_4').addClass('end_tour');
 																	if ($('#empl4_4').hasClass('end_tour')) {

@@ -1,3 +1,12 @@
+@font-face{
+	font-family: "Blue Highway";
+	src:url(../font/blue highway bd.ttf) format("ttf"),
+	url(../font/blue highway bd.ttf) format("ttf"),
+	url(../font/blue highway cd.ttf) format("ttf"),
+	url(../font/blue highway d.ttf) format("ttf"),
+	url(../font/blue highway linocut.ttf) format("ttf"),
+	url(../font/blue highway rg.ttf) format("ttf");
+}
 .test{
 	height: 100vh;
 	width: 100%;
@@ -36,16 +45,18 @@
 	width: 100%;
 	position: absolute;
 	display: flex;
+	background: url(../images/plateau/background_emplacement.png);
+	background: cover;
 }
 .act_left{
-	width: 70%;
+	width: 80%;
 	height: 100%;
 	display: flex;
 	justify-content: center;
 	align-items: center;
 }
 .act_right{
-	width: 30%;
+	width: 20%;
 	height: 100%;
 }
 .valid{
@@ -55,14 +66,44 @@
 	align-items: center;
 	justify-content: center;
 }
-.valid button,input{
-	height: 100%;
+.valid .cancel,input{
 	border-radius: 8px;
+	border: 0px;
+	transition: 0.55s;
+}
+.cancel:focus,.valid input:focus{
+	-webkit-box-shadow: inset 6px 7px 48px 0px rgba(0,0,0,0.75);
+	-moz-box-shadow: inset 6px 7px 48px 0px rgba(0,0,0,0.75);
+	box-shadow: inset 6px 7px 48px 0px rgba(0,0,0,0.75);
+}
+.valid form{
+	height: 67%;
+	width: 50%;
+}
+.valid input{
+	background: url(../images/plateau/valid.svg) no-repeat;
+	background: cover;
+	width: 88%;
+    height: 100%;
+}
+.valid input:hover,.cancel:hover{
+	-webkit-box-shadow: 6px 7px 48px 0px rgba(0,0,0,0.75);
+	-moz-box-shadow: 6px 7px 48px 0px rgba(0,0,0,0.75);
+	box-shadow: 6px 7px 48px 0px rgba(0,0,0,0.75);
+	transform: scale(1.1);
+}
+.cancel{
+	background: url(../images/plateau/cancel.svg) no-repeat;
+	background: cover;
+	width:44%;
+	height: 66%;
 }
 .emplacement{
 	height: 90%;
-	width: 27%;
+	width: 24%;
 	border:dashed 2px white;
+	display: flex;
+	align-items: center;
 }
 #empl4_3 .hand_selected:nth-child(2){
 	display: none;
@@ -162,7 +203,11 @@
 	transform: scale(1.5);
 	cursor:pointer;
 }
+#sub1,#sub2,#sub3,#sub4{
+	transition: 0.55s;
+	visibility: hidden;
 
+}
 .actions img,.actions_adverses img{
 	transition: 0.55s;
 }
@@ -177,6 +222,7 @@
 .face_vosible{
 	position: absolute;
 	transform: translateZ(3px);
+	transform: rotateY(180deg)
 }
 .baguette{
 	position: absolute;
@@ -191,6 +237,7 @@
 	height: 99.5%;
 	overflow: hidden;
 	z-index: 100;
+	font-family: "Blue Highway",sans-serif;
 }
 .contain_chat_in{
 	height: 100%;
@@ -292,7 +339,7 @@
     color: white;
 }
 .input textarea{
-	    width: 88%;
+	width: 88%;
     height: 80%;
 }
 
