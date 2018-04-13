@@ -1,6 +1,121 @@
-{# empty Twig template #}
-{% block body %}
-    <h2>Bienvenue {{ app.user.username }} !</h2>
-        
-<h3>Page d'administration uniquement disponible aux administrateurs</h3>
-{% endblock body %}
+{% extends 'base_connected.html.twig' %}
+    {% block stylesheets %}
+        <link rel="stylesheet" href="{{ asset('assets/css/screen_admin.css')}}">
+    {% endblock %}
+    {% block title %}Hanamikoji - Administration{% endblock %}
+    {% block body %}
+        <div class="wrapper">
+            <!-- HEADER -->
+            <header class="header">
+                <!-- Navbar -->
+                <nav class="header-nav">
+                    <div class="container-fluid">
+                        <div class="row align-items-center">
+                            <!-- Logo -->
+                            <div class="header-logo offset-3 col-6 offset-sm-0 col-sm-2 col-lg-2 col-xl-1 order-sm-1">
+                                <img class="img-fluid" src="{{asset('assets/images/logo.png')}}" alt="logo">
+                            </div>
+                            <!-- MENU burger -->
+                            <div class="d-flex col-12 justify-content-center align-items-center">
+                                <div id="burger-container">
+                                    <div id="burger">
+                                        <span></span>
+                                        <span></span>
+                                        <span></span>
+                                        <span></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- MENU items -->
+                            <ul class="header-menu col-12 offset-sm-3 col-sm offset-lg-3 col-lg offset-xl-7 col-xl d-flex align-items-center justify-content-between order-1">
+                                <li><a href="{{ path('home') }}">Accueil</a></li>
+                                <li><a href="{{ path('nouvelle_partie') }}">Jeu</a></li>
+                                <li><a href="{{ path('rules') }}">Regles</a></li>
+                                <li><a href="#">{{ app.user.username }}</a></li>
+                                <li><a id="sort-down" href="#"><i class=" align-items-center fas fa-sort-down"></i></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </nav>
+                <!-- SUB Menu -->
+                <ul class="header-sub-menu offset-1 col-11 offset-sm-6 col-sm-6 offset-md-5 col-md-7 offset-lg-8 cool-lg-4 offset-xl-9 col-xl-3">
+                    <li><a href="{{ path('profil') }}"><i class="fas fa-cog mr-10"></i>Profil</a></li>
+                    <hr>
+                    {% if is_granted('ROLE_ADMIN') %}
+                        <li><a href="{{ path('admin') }}"><i class="fas fa-cog mr-10"></i>Gérer les utilisateurs</a></li>
+                        <hr>
+                    {% endif %}
+                    <li><a href="{{ path('security_logout') }}"><i class="fas fa-sign-out-alt mr-10"></i>Déconnexion</a></li>
+                </ul>
+            </header>
+            <!-- LINEAR GRADIENT -->
+            <div class="l-gradient">
+                <!-- MOTIF background -->
+                <div class="l-bg">
+                <!-- SECTION stats -->
+                        <section class="section-stats row">
+                            <div class="offset-2 col-8">
+                                <div class="section-stats-l1 row justify-content-between align-items-center">
+                                    <div class="col-12 col-md-6 col-lg text-center section-stats-l1-text">
+                                        <a class="red" href="#">Joueur</a>
+                                    </div>
+                                    <div class="col-12 col-md-6 col-lg text-center section-stats-l1-text">
+                                        <a href="#">Parties jouées</a>
+                                    </div>
+                                    <div class="col-12 col-md-6 col-lg text-center section-stats-l1-text">
+                                        <a href="#">Statut du joueur</a>
+                                    </div>
+                                    <div class="col-12 col-md-6 col-lg text-center section-stats-l1-text">
+                                        <a href="#">Bloquer/Débloquer le joueur</a>
+                                    </div>
+                                </div>
+                                {% for joueur in joueurs %}
+                                <div class="section-stats-l2 row">
+                                    <div class="section-stats-l2-bg col-12 col-md-6 col-lg text-center">
+                                        <a class="red d-flex align-items-center justify-content-center" href="#">{{ joueur.username }}</a>
+                                    </div>
+                                    <div class="section-stats-l2-bg col-12 col-md-6 col-lg text-center">
+                                        <a href="#">{{ joueur.parties_played }}</a>
+                                    </div>
+                                    <div class="section-stats-l2-bg col-12 col-md-6 col-lg text-center">
+                                        <a href="#">
+                                            {% if joueur.ban_statut == 0 %}
+                                            Débloqué
+                                            {% elseif joueur.ban_statut == 1 %}
+                                            Bloqué
+                                            {% endif %}
+                                        </a>
+                                    </div>
+                                    <div class="section-stats-l2-bg col-12 col-md-6 col-lg text-center">
+                                        <a href="#"><a href="{{ path('admin_delete_user',{'id': joueur.id}) }}">Bloquer/Débloquer</a></a>
+                                    </div>
+                                </div>
+                                {% endfor %}
+                            </div>
+                        </section>
+                    </div>
+                </div>
+            </div>
+            <!-- Footer -->
+            <footer id="maincontent" class="footer">
+                <div class="container-fluid">
+                    <div class="row align-items-center justify-content-center justify-content-md-between">
+                        <div class="col-12 col-md-3 text-center footer-items">
+                            <p>All rights reserved. StudioGIBS</p>
+                        </div>
+                        <div class="col-12 col-md-3 d-flex justify-content-between align-items-center footer-items">
+                            <img class="img-fluid footer-networks" src="{{ asset('assets/images/instagram-logo.png')}}" alt="instagram logo">
+                            <img class="img-fluid footer-networks" src="{{ asset('assets/images/facebook-logo.png')}}" alt="logo facebook">
+                            <img class="img-fluid footer-networks" src="{{ asset('assets/images/twitter-logo.png')}}" alt="logo twitter">
+                        </div>
+                        <div class="col-12 col-md-3 text-center">
+                            <img class="img-fluid footer-logo" src="{{ asset('assets/images/logo-agence.png') }}" alt="logo agence">
+                        </div>
+                    </div>
+                </div>
+            </footer>
+        </div>
+    {% endblock %}
+{% block javascripts %}
+<script src="{{asset('assets/js/nav-toggle.js')}}"></script>
+{% endblock %}

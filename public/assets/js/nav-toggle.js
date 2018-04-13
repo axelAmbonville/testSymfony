@@ -4,3 +4,8 @@ $(document).ready(function(){
         $(".header-menu").toggleClass("active");
     });
 });
+
+// SUB MENU
+$("#sort-down").click( function () {
+	$(".header-sub-menu").slideToggle("400");
+});

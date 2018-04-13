@@ -52,9 +52,12 @@
         {% endblock %}
         {% block body %}{% endblock %}
         <script type='text/javascript' src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
-        <script src="{{ asset('assets/js/plateau.js') }}"></script>
-        {% block javascripts %}{% endblock %}
         <script type='text/javascript' src="{{ asset('assets/js/bootstrap.js') }}"></script>
         <script type='text/javascript' src="{{ asset('assets/js/bootstrap.bundle.js') }}"></script>
+        <script src="{{ asset('assets/js/plateau.js') }}"></script>
+        <script type='text/javascript' src="{{ asset('assets/js/socket.io.js') }}"></script>
+        {% block javascripts %}{% endblock %}
+
+
     </body>
 </html>

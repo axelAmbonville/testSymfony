@@ -22,4 +22,29 @@ class AdminController extends Controller
         $joueurs = $this->getDoctrine()->getRepository('App:User')->findAll();
         return $this->render('admin/admin.html.twig', ['joueurs'=> $joueurs]);
     }
+
+    /**
+     * @Route("/delete_user/{id}", name="admin_delete_user")
+     */
+    public function admin_delete($id)
+    {
+       $joueur = $this->getDoctrine()->getRepository("App:User")->find($id);
+       $statut = $joueur->getBan_statut();
+       if ($statut == 0) {
+           $joueur->setBan_statut(1);
+           $em = $this->getDoctrine()->getManager();
+           $em->persist($joueur);
+           $em->flush();
+           $this->addFlash('notice_admin', 'Joueur bloqué!');
+       }else{
+           $joueur->setBan_statut(0);
+           $em = $this->getDoctrine()->getManager();
+           $em->persist($joueur);
+           $em->flush();
+           $this->addFlash('notice_admin', 'Joueur débloqué!');
+       }
+
+        $joueurs = $this->getDoctrine()->getRepository('App:User')->findAll();
+        return $this->redirectToRoute('admin', ['joueurs' => $joueurs]);
+    }
 }

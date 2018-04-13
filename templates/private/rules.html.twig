@@ -1,5 +1,297 @@
 {% extends 'base_connected.html.twig' %}
-
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('assets/css/screen_rules.css')}}">
+{% endblock %}
 {% block body %}
-    <h1> ici vous retrouverez les règles et autres .....</h1>
+    <!-- HEADER -->
+    <header class="header">
+        <!-- Zone Baseline -->
+        <div class="container-fluid">
+            <div class="header-baseline col-8">
+                <img class="img-fluid" src="{{ asset('assets/images/zone-black.png')}}" alt="Zone Baseline">
+                <h1 class="col-12">Explication des regles
+                    <span>Et des fonctionnalités</span>
+                </h1>
+            </div>
+        </div>
+        <!-- Navbar -->
+        <nav class="header-nav">
+            <div class="container-fluid">
+                <div class="row align-items-center">
+                    <!-- Logo -->
+                    <div class="header-logo offset-3 col-6 offset-sm-0 col-sm-2 col-lg-2 col-xl-1 order-sm-1">
+                        <img src="{{asset('assets/images/logo.png')}}" class="img-fluid" alt="logo">
+                    </div>
+                    <!-- MENU burger -->
+                    <div class="d-flex col-12 justify-content-center align-items-center">
+                        <div id="burger-container">
+                            <div id="burger">
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- MENU items -->
+                    <ul class="header-menu col-12 offset-sm-3 col-sm offset-lg-3 col-lg offset-xl-7 col-xl d-flex align-items-center justify-content-between order-1">
+                        {% if is_granted('ROLE_ADMIN') %}
+                            <a href="{{path('admin')}}">Administration</a>
+                        {% endif %}
+                        <a href="{{path('home')}}">Accueil</a>
+                        <a href="{{path('rules')}}">Regles</a>
+                        <a href="{{path('profil')}}">Profil</a>
+                        <a href="{{path('classement')}}">Palmarès</a>
+
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <!-- REGLES -->
+    <section class="section-black section-rules">
+        <div class="section-content">
+            <div class="container">
+                <div class="btn btn-red text-center col-5 col-sm-4 col-md-3 col-lg-2">
+                    <a href="#">Règles</a>
+                </div>
+                <div class="row section-rules-text">
+                    <div class="offset-1 col-10 offset-lg-1 col-lg-5">
+                        <p>Au début de la partie, chaque joueur se voit distribuer 6 cartes objets, ainsi que les 4 jetons d’action. Les 7 maîtres ninja leur font alors face. Le but premier est d’utiliser les différentes cartes objets associées à leur domaine de prédilection pour attirer leurs faveurs. Le premier ayant convaincu 4 des 7 maîtres, ou ayant cumulé 11 points de **, a gagné la partie.</p>
+                        <p>Chaque tour se découpe en 3 phases :
+                            Lors de la première phase, on retire une carte au hasard du paquet, puis on distribue les cartes et les jetons. Les cartes restantes forment une pile.
+                            Lors de la deuxième phase, chaque joueur va utiliser ses 4 actions, l’une après l’autre. Le plus jeune commence.</p>
+                    </div>
+                    <div class="offset-1 col-10 offset-lg-0 col-lg-5">
+                        <p>Lors de la troisième phase, les joueurs retournent chacun leurs six cartes, et on compte les points. Les joueurs ayant le plus de cartes correspondantes aux maîtres gagnent leurs faveurs. Si les 2 joueurs possèdent le même nombre de cartes correspondant au même maître, alors le maître reste neutre. Si l'un des deux joueurs possède 4 maîtres, ou 11 points de **, il gagne la partie. Sinon on ramasse toutes les cartes, et on retourne à la phase 1. Celui qui commence change à chaque tour.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- CARTES -->
+    <section class="section-red section-cards">
+        <div class="section-cards-bg">
+            <div class="section-content">
+                <div class="container">
+                    <div class="btn btn-black text-center col-5 col-sm-4 col-md-3 col-lg-2">
+                        <a href="#">Cartes et jetons</a>
+                    </div>
+                    <div class="row section-cards-text-l1">
+                        <div class="offset-1 col-10 offset-md-5 col-md-5">
+                            <p>Le jeu est composé de 4 éléments principaux : des cartes de maîtres, des cartes d’objets, des jetons d’actions et des jetons de victoire. Chacun de ses éléments ont un rôle différent et primordial dans le jeu :</p>
+                        </div>
+                    </div>
+                    <div class="btn btn-black text-center col-5 col-sm-4 col-md-4 col-lg-2">
+                        <a href="#">Maîtres</a>
+                    </div>
+                </div>
+                <div class="row section-cards-carousel">
+                    <div class="section-cards-shinobi order-1 col-6 order-md-0 col-md-3">
+                        <img src="{{ asset('assets/images/shinobi-cartes.png')}}" alt="shinobi cartes" class="img-fluid">
+                    </div>
+                    <div class="offset-3 col-6 offset-md-0 col-md-9">
+                        <div id="example">
+                            <carousel-3d>
+                                <slide :index="0">
+                                    <img src="{{ asset('assets/images/cartes/haruo.png')}}">
+                                </slide>
+                                <slide :index="1">
+                                    <img src="{{ asset('assets/images/cartes/akimoto.png')}}">
+                                </slide>
+                                <slide :index="2">
+                                    <img src="{{ asset('assets/images/cartes/kaito.png')}}">
+                                </slide>
+                                <slide :index="3">
+                                    <img src="{{ asset('assets/images/cartes/masahiro.png')}}">
+                                </slide>
+                                <slide :index="4">
+                                    <img src="{{ asset('assets/images/cartes/ogawa.png')}}">
+                                </slide>
+                                <slide :index="5">
+                                    <img src="{{ asset('assets/images/cartes/shimizu.png')}}">
+                                </slide>
+                                <slide :index="6">
+                                    <img src="{{ asset('assets/images/cartes/takumi.png')}}">
+                                </slide>
+                            </carousel-3d>
+                        </div>
+                    </div>
+                    <div class="container">
+                        <div class="row section-cards-text-l2">
+                            <div class="offset-1 col-10 offset-md-5 col-md-5">
+                                <p>Les maîtres ninja, qui sont au nombre de 7, chacun ayant sa spécialité et doivent donner leur faveur à l’un ou l’autre joueur. Chaque maître rapporte un tel nombre de points de ** lorsqu’il est acquit :</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- COMPETENCES -->
+    <section class="section-black-reverse section-competences">
+        <div class="section-content-reverse">
+            <div class="container">
+                <div class="btn btn-red text-center col-5 col-sm-4 col-md-4 col-lg-2">
+                    <a href="#">Compétences</a>
+                </div>
+                <!-- CARTES compétences -->
+                <div id="photostack-1" class="photostack photostack-start">
+                    <div>
+                        <figure>
+                            <img class="figure-photostack" src="{{ asset('assets/images/competences/zanshin.png')}}" height="100%" alt="zanshin carte competences"/>
+                        </figure>
+                        <figure>
+                            <img class="figure-photostack" src="{{ asset('assets/images/competences/hawarimi.png')}}" height="100%" alt="hawarimi carte competences"/>
+                        </figure>
+                        <figure>
+                            <img class="figure-photostack" src="{{ asset('assets/images/competences/senban.png')}}" height="100%" alt="senban carte competences"/>
+                        </figure>
+                        <figure>
+                            <img class="figure-photostack" src="{{ asset('assets/images/competences/hikiwake.png')}}" height="100%" alt="hikiwake carte competences"/>
+                        </figure>
+                        <figure>
+                            <img class="figure-photostack" src="{{ asset('assets/images/competences/torinoko.png')}}" height="100%" alt="torinoko carte competences"/>
+                        </figure>
+                        <figure>
+                            <img class="figure-photostack" src="{{ asset('assets/images/competences/okuni-hiya.png')}}" height="100%" alt="okuni-hiya carte competences"/>
+                        </figure>
+                        <figure>
+                            <img class="figure-photostack" src="{{ asset('assets/images/competences/hira.png')}}" height="100%" alt="hira carte competences"/>
+                        </figure>
+                        <figure>
+                            <img class="figure-photostack" src="{{ asset('assets/images/competences/horuko-hiya.png')}}" height="100%" alt="horuko-hiya carte competences"/>
+                        </figure>
+                        <figure>
+                            <img class="figure-photostack" src="{{ asset('assets/images/competences/senbon.png')}}" height="100%" alt="senbon carte competences"/>
+                        </figure>
+                        <figure>
+                            <img class="figure-photostack" src="{{ asset('assets/images/competences/yoko-aruki.png')}}" height="100%" alt="yoko-aruki carte competences"/>
+                        </figure>
+                    </div>
+                </div>
+                <!-- TEXTE Compétences -->
+                <div class="row section-competences-text-l1">
+                    <div class="offset-1 col-10 offset-md-5 col-md-5">
+                        <p>Les cartes objets, au nombre de 21, sont distribuées aux joueurs. Ces cartes, servent à s’attirer les différentes faveurs des maîtres.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- JETONS VICTOIRES -->
+    <section class="section-red-l2 section-jetonwin">
+        <div class="section-jetonwin-bg">
+            <div class="section-content">
+                <div class="section-nuage-shinobi offset-md-9 order-1 offset-6 col-6 order-md-0 col-md-3">
+                    <img src="{{ asset('assets/images/shinobi-nuage.png')}}" alt="shinobi nuage" class="img-fluid">
+                </div>
+                <div class="container">
+                    <div class="btn btn-black text-center col-5 col-sm-4 col-md-3 col-lg-2">
+                        <a href="#">Jetons victoires</a>
+                    </div>
+                    <!-- GROUPE JETONS  -->
+                    <div class="row section-competences-text-l1">
+                        <div class="offset-1 col-10 offset-md-6 col-md-4">
+                            <img src="{{ asset('assets/images/jeton-grp.png')}}" alt="jeton groupe" class="img-fluid">
+                        </div>
+                    </div>
+                    <!-- TEXT JETONS -->
+                    <div class="offset-1 col-10">
+                        <p>Les jetons de victoires au nombre de 7, qui sont à placer sur les maîtres ninjas dont les faveurs ont été accordé.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- JETONS ACTIONS -->
+    <section class="section-black-reverse-l2 section-jetonaction">
+        <div class="section-content-reverse">
+            <div class="container">
+                <!-- JETONS Groupe -->
+                <div class="row section-jetonaction-img">
+                    <div class="offset-1 col-10 offset-md-6 col-md-4">
+                        <img src="{{ asset('assets/images/jeton-big.png')}}" alt="jeton groupe" class="img-fluid">
+                    </div>
+                </div>
+                <div class="btn btn-red text-center col-5 col-sm-4 col-md-3 col-lg-2">
+                    <a href="#">Jetons actions</a>
+                </div>
+                <!-- Jetons images-->
+                <div class="row align-items-start section-jeton-action-jetons">
+                    <div class="offset-1 col-10 offset-sm-0 col-sm-6 offset-md-0 col-md d-flex flex-column align-items-center justify-content-center">
+                        <img src="{{ asset('assets/images/jeton-secret.jpg')}}" alt="jeton secret" class="img-fluid jeton-img">
+                        <p>Secret : Choisissez 1 carte de votre main, et placez-la face cachée sous le jeton secret. Cette carte sera révélée lors de la phase de décompte des points et elle rapportera des points. Vous pouvez regarder cette carte à tout moment dans la partie.</p>
+                    </div>
+                    <div class="offset-1 col-10 offset-sm-0 col-sm-6 offset-md-0 col-md d-flex flex-column align-items-center justify-content-centerr">
+                        <img src="{{ asset('assets/images/jeton-compromis.jpg')}}" alt="jeton compromis" class="img-fluid jeton-img"">
+                        <p>Compromis : Choisissez 2 cartes de votre main, et placez-les face cachée sous le jeton de compromis. Ces cartes ne rapporteront pas de points lors de cette manche. Vous pouvez regarder ces cartes à tout moment pendant la partie.</p>
+                    </div>
+                    <div class="offset-1 col-10 offset-sm-0 col-sm-6 offset-md-0 col-md d-flex flex-column align-items-center justify-content-center">
+                        <img src="{{ asset('assets/images/jeton-cadeau.jpg')}}" alt="jeton cadeau" class="img-fluid jeton-img"">
+                        <p>Cadeau : Choisissez 3 cartes de votre main, et placez-les face visible devant vous. Votre adversaire choisit 1 carte parmi celles-ci et il la place sur son côté de la ligne des geishas, à côté de la geisha correspondante. Placez ensuite les 2 cartes de votre côté, à côté des geishas correspondantes. Ces cartes rapporteront des points.</p>
+                    </div>
+                    <div class="offset-1 col-10 offset-sm-0 col-sm-6 offset-md-0 col-md d-flex flex-column align-items-center justify-content-center">
+                        <img src="{{ asset('assets/images/jeton-concurrence.jpg')}}" alt="jeton concurrence" class="img-fluid jeton-img"">
+                        <p>Concurrence : Choisissez 4 cartes de votre main et placez-les face visible devant vous. Vous divisez ces cartes en deux séries comprenant chacune 2 cartes. Votre adversaire choisit 1 série et place ces 2 cartes de son côté de la ligne des geishas à côté des geishas correspondantes. Placez ensuite les 2 cartes restantes de votre côté, à côté des geishas correspondantes. Ces cartes rapporteront des points.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- CHAT -->
+    <section id="scroll_to_top" class="section-chat offset-4 col-8 offset-md-8 col-md-4">
+        <div class="section-chat-head text-center">
+            <span>Chat</span>
+        </div>
+        <div class="section-chat-visible">
+            <div class="section-chat-body" style="height: 300px;"></div>
+            <form class="section-chat-foot"">
+            <input id="message" placeholder="Envoyer un message ..."></input>
+            <input id="send" type="submit">
+            </form>
+        </div>
+    </section>
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container-fluid">
+            <div class="row align-items-center justify-content-center justify-content-md-between">
+                <div class="col-12 col-md-3 text-center footer-items">
+                    <p>All rights reserved. StudioGIBS</p>
+                </div>
+                <div class="col-12 col-md-3 d-flex justify-content-between align-items-center footer-items">
+                    <a href="#" class="footer-img-hover">
+                        <img class="img-fluid footer-networks" src="{{ asset('assets/images/instagram-logo.png')}}" alt="instagram logo">
+                    </a>
+                    <a class="footer-img-hover" target="_blank" href="https://www.facebook.com/LaRouteDuShinobi/?notif_id=1523262394438819&notif_t=page_invite&ref=notif">
+                        <img class="img-fluid footer-networks" src="{{ asset('assets/images/facebook-logo.png')}}" alt="logo facebook">
+                    </a>
+                    <a href="#" class="footer-img-hover">
+                        <img class="img-fluid footer-networks" src="{{ asset('assets/images/twitter-logo.png')}}" alt="logo twitter">
+                    </a>
+                </div>
+                <div class="col-12 col-md-3 text-center">
+                    <img class="img-fluid footer-logo" src="{{ asset('assets/images/logo-agence.png')}}" alt="logo agence">
+                </div>
+            </div>
+        </div>
+    </footer>
+{% endblock %}
+{% block javascripts %}
+    <!-- NAVBAR TOGGLE -->
+    <script src="{{ asset('assets/js/nav-toggle.js')}}"></script>
+    <!-- VUE JS -->
+    <script src="{{ asset('assets/js/vue.js')}}"></script>
+    <!-- CAROUSEL JS -->
+    <script src="{{ asset('assets/js/vue-carousel.js')}}"></script>
+    <script src="{{ asset('assets/js/vue-carousel3d.js')}}"></script>
+    <!-- SLIDER CARTES COMPETENCES -->
+    <script src="{{ asset('assets/js/modernizr.min.js')}}"></script>
+    <script src="{{ asset('assets/js/classie.js')}}"></script>
+    <script src="{{ asset('assets/js/photostack.js')}}"></script>
+    <script src="{{ asset('assets/js/competences-min.js')}}"></script>
+    <!-- INPUT SHOW -->
+    <script src="{{ asset('assets/js/input-show.js')}}"></script>
+    <!-- CHAT SHOW -->
+    <script src="{{ asset('assets/js/chat-min.js')}}"></script>
 {% endblock %}

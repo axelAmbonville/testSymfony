@@ -19,6 +19,16 @@ class UserRepository extends ServiceEntityRepository
         parent::__construct($registry, User::class);
     }
 
+    public function orderByScore() {
+        return $this->createQueryBuilder('u')
+            ->addOrderBy('u.score', 'DESC')
+            ->addOrderBy('u.parties_played', 'DESC')
+            ->addOrderBy('u.parties_win', 'DESC')
+            ->addOrderBy('u.parties_loose', 'DESC')
+            ->getQuery()
+            ->getResult();
+    }
+
     /*
     public function findBySomething($value)
     {

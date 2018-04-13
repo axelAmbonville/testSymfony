@@ -181,7 +181,7 @@ class User implements UserInterface, \Serializable
     }
 
     function getFriends() {
-        return $this->friends;
+        return json_decode($this->friends);
     }
 
     function getBan_statut() {

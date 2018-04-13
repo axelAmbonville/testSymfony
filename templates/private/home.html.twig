@@ -19,10 +19,13 @@
 							</div>
 						</div>
 						<div class="header-menu col-12 offset-sm-3 col-sm offset-lg-3 col-lg offset-xl-7 col-xl d-flex align-items-center justify-content-between order-1">
+							{% if is_granted('ROLE_ADMIN') %}
+								<a href="{{path('admin')}}">Administration</a>
+							{% endif %}
 							<a href="{{path('nouvelle_partie')}}">Jeu</a>
 							<a href="{{path('rules')}}">Regles</a>
-							<a href="{{path('contact')}}">Assistance</a>
-							<a href="{{path('profil')}}">{{app.user.username}}</a>
+							<a href="{{path('profil')}}">Profil</a>
+							<a href="{{path('classement')}}">Palmarès</a>
 						</div>
 					</div>
 				</div>
@@ -38,11 +41,9 @@
 					<div class="row justify-content-center">
 						<h3>Comment jouer ?</h3>
 					</div>
-					<div class="row embed-responsive">
-						<video class="offset-0 col-12 offset-sm-1 col-sm-10 offset-md-2 col-md-8 offset-xl-3 col-xl-6" preload="true" autoplay loop poster="{{asset('assets/images/tuto.jpg')}}">
-							<source src="{{asset('assets/images/video/tuto.mp4')}}" type="video/mp4">
-							<source src="{{asset('assets/images/video/tuto.webm')}}" type="video/webm">
-							<source src="{{asset('images/video/tuto.ogg')}}" type="video/ogg">
+					<div class="row embed-responsive" style="height:400px">
+						<video class="offset-0 col-12 offset-sm-1 col-sm-10 offset-md-2 col-md-8 offset-xl-3 col-xl-6" preload="true" controls loop poster="{{asset('assets/images/tuto.jpg')}}">
+							<source src="{{asset('assets/images/video/plateau_1.mp4')}}" type="video/mp4">
 							"Vous n'avez pas de navigateur moderne, donc pas de balise video HTML5 !"
 						</video>
 					</div>

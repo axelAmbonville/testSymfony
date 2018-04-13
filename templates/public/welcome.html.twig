@@ -1,11 +1,24 @@
 {# empty Twig template #}
 {% extends 'base_public.html.twig' %}
+ {% block stylesheets %}
+     <link rel="stylesheet" href="{{ asset('assets/css/screen_welcome.css') }}"/>
+ {% endblock %}
 {% block body %}
-    <h1>Bienvenue sur le site Hanamikoji </h1>
-    <h3>Vous vous trouvez sur la page de connexion du site</h3>
-    
-    <ul>
-        <li><a  href="{{path("security_login")}}">Connexion</a></li>
-        <li><a  href="{{path("user_registration")}}">Inscription</a></li>
-    </ul>
+    <main class="main-bg">
+        <div class="container-fluid">
+            <div class="main-content">
+                <div class="main-logo offset-3 col-6 offset-sm-4 col-sm-4 offset-lg-5 col-lg-2">
+                    <img src="{{ asset('assets/images/logo.svg')}}" alt="logo" class="img-fluid">
+                </div>
+                <div class="row">
+                    <div class="btn btn-connexion offset-1 col-10 offset-sm-1 col-sm-5 offset-lg-3 col-lg-3 text-center">
+                        <a href="{{path("security_login")}}">Connexion</a>
+                    </div>
+                    <div class="btn btn-inscription offset-1 col-10 offset-sm-0 col-sm-5 offset-lg-0 col-lg-3 text-center">
+                        <a href="{{path("user_registration")}}">Inscription</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
 {% endblock %}

@@ -1,0 +1,1 @@
+$(".section-chat-head").click(function(){$(".section-chat-visible").slideToggle(400)}),$(document).ready(function(){function o(o){$("html, body").animate({scrollTop:$(document).height()},400),$(window).scroll(function(){$(window).scrollTop()>440?$(o).fadeOut():$(o).fadeIn()})}o("#scroll_to_top")});

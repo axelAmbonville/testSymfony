@@ -26,6 +26,8 @@ class RegistrationController extends Controller
             $user->setPassword($password);
 
             // Par defaut l'utilisateur aura toujours le rôle ROLE_USER
+            $amis = array();
+            $user->setFriends(json_encode($amis));
             $user->setRoles(['ROLE_USER']);
 
             // On enregistre l'utilisateur dans la base

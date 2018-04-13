@@ -27,7 +27,10 @@ class gameController extends Controller
     public function nouvellePartie() {
 
         $joueurs = $this->getDoctrine()->getRepository(User::class)->findAll();
-        return $this->render('game/new.html.twig', ['joueurs' => $joueurs]);
+        $joueur_session = $this->getUser();
+        $amis = (array)$joueur_session->getFriends();
+        $parties = $this->getDoctrine()->getRepository('App:Partie')->cherchePartie($joueur_session->getId());
+        return $this->render('game/new.html.twig', ['joueurs' => $joueurs, 'amis' => $amis, 'parties' => $parties]);
     }
 
 
@@ -69,7 +72,7 @@ class gameController extends Controller
 
         $partie->setCarte_placed_j1(json_encode(array('maitre1'=>0,'maitre2'=>0,'maitre3'=>0,'maitre4'=>0,'maitre5'=>0,'maitre6'=>0,'maitre7'=>0)));
         $partie->setCarte_placed_j2(json_encode(array('maitre1'=>0,'maitre2'=>0,'maitre3'=>0,'maitre4'=>0,'maitre5'=>0,'maitre6'=>0,'maitre7'=>0)));
-        $partie->setManche(0);
+        $partie->setManche(1);
 
         $random_tour = rand(1, 2);
         if ($random_tour==1) {
@@ -129,12 +132,18 @@ class gameController extends Controller
         }
         $actionsJ1 = $partie->getActions_j1();
         $actionsJ2 = $partie->getActions_j2();
+        $j1Id = $partie->getJ1_id();
+        $j2Id = $partie->getJ2_id();
+        $j1 = $this->getDoctrine()->getRepository("App:User")->find($j1Id);
+        $j2 = $this->getDoctrine()->getRepository("App:User")->find($j2Id);
         if ($actionsJ1->secret->etat==1 && $actionsJ1->dissimulation->etat==1 && $actionsJ1->cadeau->etat==2 && $actionsJ1->concurrence->etat==2){
             if ($actionsJ2->secret->etat==1 && $actionsJ2->dissimulation->etat==1 && $actionsJ2->cadeau->etat==2 && $actionsJ2->concurrence->etat==2){
                 return $this->redirectToRoute('fin_manche', ['id' => $partie->getId()]);
+            }else{
+                return $this->render('game/afficher.html.twig', ['cartes' => $tabCartes, 'objectifs' => $objectifs, 'partie' => $partie, 'joueur1' => $j1, 'joueur2' => $j2]);
             }
         }else {
-            return $this->render('game/afficher.html.twig', ['cartes' => $tabCartes, 'objectifs' => $objectifs, 'partie' => $partie]);
+            return $this->render('game/afficher.html.twig', ['cartes' => $tabCartes, 'objectifs' => $objectifs, 'partie' => $partie, 'joueur1' => $j1, 'joueur2' => $j2]);
         }
     }
 
@@ -586,10 +595,44 @@ class gameController extends Controller
         foreach ($cartePlacedJ1 as $key => $value){
             if ($cartePlacedJ1[$key] > $cartePlacedJ2[$key]){
                 $objectifs[$key] = 1;
-                $scoreJ1 += 1;
             }else if ($cartePlacedJ1[$key] < $cartePlacedJ2[$key]){
                 $objectifs[$key] = 2;
-                $scoreJ2 += 1;
+
+            }
+        }
+        foreach ($objectifs as $key=>$value){
+            if ($value ==1){
+                if ($key =='maitre1'){
+                    $scoreJ1 += 2;
+                }if ($key =='maitre2'){
+                    $scoreJ1 += 2;
+                }if ($key =='maitre3'){
+                    $scoreJ1 += 2;
+                }if ($key =='maitre4'){
+                    $scoreJ1 += 3;
+                }if ($key =='maitre5'){
+                    $scoreJ1 += 3;
+                }if ($key =='maitre1'){
+                    $scoreJ1 += 4;
+                }if ($key =='maitre1'){
+                    $scoreJ1 += 5 ;
+                }
+            }else if($value == 2){
+                if ($key =='maitre1'){
+                    $scoreJ2 += 2;
+                }if ($key =='maitre2'){
+                    $scoreJ2 += 2;
+                }if ($key =='maitre3'){
+                    $scoreJ2 += 2;
+                }if ($key =='maitre4'){
+                    $scoreJ2 += 3;
+                }if ($key =='maitre5'){
+                    $scoreJ2 += 3;
+                }if ($key =='maitre1'){
+                    $scoreJ2 += 4;
+                }if ($key =='maitre1'){
+                    $scoreJ2 += 5 ;
+                }
             }
         }
         $partie->setCarte_placed_j1(json_encode($cartePlacedJ1));
@@ -613,7 +656,7 @@ class gameController extends Controller
         $em->persist($partie);
         $em->flush();
 
-        if ($scoreJ1 >= 11){
+        if ($scoreJ1 >= 11 AND $scoreJ1>$scoreJ2){
             $winner = $this->getDoctrine()->getRepository('App:User')->find($idJ1);
             $looser = $this->getDoctrine()->getRepository('App:User')->find($idJ2);
 
@@ -628,8 +671,11 @@ class gameController extends Controller
             $lPartiesPlayed += 1;
             $wPartiesWin += 1;
             $lPartiesLoose += 1;
-            $scoreWinner = ($wPartiesWin/$wPartiesPlayed)*($wPartiesLoose/$wPartiesPlayed)*3;
-            $scoreLooser = ($lPartiesWin/$lPartiesPlayed)*($lPartiesLoose/$lPartiesPlayed)*3;
+
+            $scoreWinner = $winner->getScore();
+            $scoreLooser = $looser->getScore();
+            $scoreWinner +=30;
+            $scoreLooser -=10;
 
             $winner->setScore($scoreWinner);
             $winner->setParties_played($wPartiesPlayed);
@@ -644,7 +690,7 @@ class gameController extends Controller
             $em->persist($looser);
             $em->flush();
             return $this->redirectToRoute('profil');
-        }elseif ($scoreJ2 >= 11){
+        }elseif ($scoreJ2 >= 11 AND $scoreJ2>$scoreJ1){
             $winner = $this->getDoctrine()->getRepository('App:User')->find($idJ2);
             $looser = $this->getDoctrine()->getRepository('App:User')->find($idJ1);
 
@@ -659,8 +705,11 @@ class gameController extends Controller
             $lPartiesPlayed += 1;
             $wPartiesWin += 1;
             $lPartiesLoose += 1;
-            $scoreWinner = ($wPartiesWin/$wPartiesPlayed)*($wPartiesLoose/$wPartiesPlayed)*3;
-            $scoreLooser = ($lPartiesWin/$lPartiesPlayed)*($lPartiesLoose/$lPartiesPlayed)*3;
+
+            $scoreWinner = $winner->getScore();
+            $scoreLooser = $looser->getScore();
+            $scoreWinner +=30;
+            $scoreLooser -=10;
 
             $winner->setScore($scoreWinner);
             $winner->setParties_played($wPartiesPlayed);
@@ -691,8 +740,11 @@ class gameController extends Controller
             $lPartiesPlayed += 1;
             $wPartiesWin += 1;
             $lPartiesLoose += 1;
-            $scoreWinner = ($wPartiesWin/$wPartiesPlayed)*($wPartiesLoose/$wPartiesPlayed)*3;
-            $scoreLooser = ($lPartiesWin/$lPartiesPlayed)*($lPartiesLoose/$lPartiesPlayed)*3;
+
+            $scoreWinner = $winner->getScore();
+            $scoreLooser = $looser->getScore();
+            $scoreWinner +=30;
+            $scoreLooser -=10;
 
             $winner->setScore($scoreWinner);
             $winner->setParties_played($wPartiesPlayed);
@@ -723,8 +775,11 @@ class gameController extends Controller
             $lPartiesPlayed += 1;
             $wPartiesWin += 1;
             $lPartiesLoose += 1;
-            $scoreWinner = ($wPartiesWin/$wPartiesPlayed)*($wPartiesLoose/$wPartiesPlayed)*3;
-            $scoreLooser = ($lPartiesWin/$lPartiesPlayed)*($lPartiesLoose/$lPartiesPlayed)*3;
+
+            $scoreWinner = $winner->getScore();
+            $scoreLooser = $looser->getScore();
+            $scoreWinner +=30;
+            $scoreLooser -=10;
 
             $winner->setScore($scoreWinner);
             $winner->setParties_played($wPartiesPlayed);

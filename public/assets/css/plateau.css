@@ -1,3 +1,10 @@
+body{
+	margin:0px;
+}
+@font-face{
+	font-family: "Chinoise";
+	src:url(../font/electroharmonix.ttf);
+}
 @font-face{
 	font-family: "Blue Highway";
 	src:url(../font/blue highway bd.ttf) format("ttf"),
@@ -41,6 +48,14 @@
 	width: 48%;
 }
 .act{
+	height: 100%;
+	width: 100%;
+	position: absolute;
+	display: flex;
+	background: url(../images/plateau/background_emplacement.png);
+	background: cover;
+}
+.act_rep{
 	height: 100%;
 	width: 100%;
 	position: absolute;
@@ -120,6 +135,7 @@
 	width: 9%;
 	top: 39%;
 	left: 4%;
+	z-index: 100;
 }
 .deck:hover{
 	animation: anim 1s infinite;
@@ -149,6 +165,21 @@
 	transform-style: preserve-3d;
 	perspective: 1200px;
 }
+.jet{
+	height: 100%;
+	width: 20%;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	transform: translateZ(-30px);
+	margin:auto;
+	margin-left: 39%;
+	z-index: 200;
+	position: absolute;
+}
+.jet img{
+	width: 100%;
+}
 #send{
 	visibility: hidden;
 	position: absolute;
@@ -170,33 +201,31 @@
 }
 .main_user{
 	display: flex;
-	height: 20%;
-	width: 10%;
-}
-.main_user{
-	display: flex;
     height: 16%;
     width: 50%;
     position: absolute;
-    top: 76%;
-    left: 20%;
+    top: 43%;
+    left: -16.5%;
     justify-content: center;
+    z-index: 10;
+    visibility: hidden;
 }
 .hand{
 	height: 100%;
 	width: 13%;
-	margin: 0.8%;
-	transition: 0.55s;
+	margin: -6.5%;
+	transition: 1s;
 }
 .hand:hover{
 	transition-delay: 1s;
-	transition:0.8s; 
+	transition:0.3s; 
 	transform: scale(2); 
 	z-index: 100;
 	cursor:pointer;
 }
 .hand_selected{
-	height: 90%;
+	height: 0%;
+	width: 100%;
 }
 .actions img:hover,.actions_adverses img:hover{
 	transition: 0.55s;
@@ -206,10 +235,55 @@
 #sub1,#sub2,#sub3,#sub4{
 	transition: 0.55s;
 	visibility: hidden;
-
+}
+#sub5,#sub6{
+	height: 100%;
+	background: url(../images/plateau/valid.svg) no-repeat;
+	width: 66%;
+}
+.in_rep{
+	height: 100%;
+	width: 30%;
+	text-align: center;
+}
+#rep_action_3 form,#rep_action_4 form{
+	width: 100%;
+	display: flex;
+}
+#rep_action_3 .act_left{
+	display: flex;
+	align-content: space-around;
+}
+#rep_action_3 img{
+	height: 91%;
+	width: 87%;
+}
+#rep_action_4 .in_rep{
+	height: 97%;
+	margin: 1px;
+	width: 50%;
+}
+.in_rep_block{
+	width: 46%;
+	height: 94%;
+}
+.in_rep_block img{
+	width: 100%;
+}
+.in_top{
+	width: 100%;
+	display: flex;
+	height: 95%;
+}
+.in_bot{
+	height: 5%;
+	text-align: center;
 }
 .actions img,.actions_adverses img{
 	transition: 0.55s;
+}
+#rep_action_4 .act_left{
+	justify-content: space-around;
 }
 .couverture{
 	position: absolute;
@@ -233,7 +307,7 @@
 .contain_chat{
 	position: absolute;
 	right: 0%;
-	width: 22%;
+	width:30%;
 	height: 99.5%;
 	overflow: hidden;
 	z-index: 100;
@@ -269,17 +343,88 @@
 	align-items: center;
 	cursor: pointer;
 }
+.chat h5{
+	text-align: center;
+}
 
 .chat_right{
 	width: 85%;
 	height:100%;
 	background-color: black;
 }
+.infos{
+	height: 23%;
+	width: 100%;
+}
+.infos_top{
+	width:100%;
+	height: 72%;
+	display: flex;
+	margin-bottom: 6%;
+	padding-top: 5%;
+}
+.infos_bot{
+	width: 100%;
+	height: 12%;
+	display: flex;
+	align-items: center;
+	align-content: center;
+	margin-bottom: 5%;
+}
+.infos_bot h1{
+	margin: 0px;
+	width: 100%;
+	text-align: center;
+	font-family: "Chinoise";
+}
+.block_infos_top{
+	width: 33%;
+	height: 100%;
+	display: flex;
+}
+#fight1 img{
+	align-self:flex-start;
+}
+#fight2{
+	align-items: center;
+	display: block;
+}
+#fight3 img{
+	align-self:flex-end;
+}
+.infos_top_bot{
+	height: 15%;
+	width: 100%;
+	display: flex;
+	align-items: center;
+}
+.infos_top_bot p{
+	width: 100%;
+	text-align: right;
+	font-family: "Chinoise";
+}
+#infos_top_top p{
+	text-align: left;
+}
+.infos_middle{
+	height: 70%;
+	width: 100%;
+	display: flex;
+	align-items: center;
+	text-align: center;
+}
+.infos_middle h1{
+	width: 100%;
+	text-align: center;
+	font-family: "Chinoise";
+	font-size: 75px;
+}
 .chat{
-	height: 90%;
+	height: 60%;
 	background-color: black;
 	width: 100%;
 	overflow: auto;
+	padding-top: 10%;
 }
 .round{
 	height: 14px;
@@ -288,6 +433,28 @@
     border-radius: 100%;
     margin: 2px;
     margin-right: 7px;
+}
+.publish a,.publish_me a{
+	color: white;
+}
+.ah{
+			position: absolute;
+			background-color: #caf5ca;
+			border: 1px solid #58b858;
+			border-radius: 10px;
+			top: 2%;
+			right: 3%;
+			z-index: 200;
+		}
+		.ah p{
+			margin: 10px;
+			color: #58b858;
+		}
+.publish a:hover{
+	color: red;
+}
+.publish_me a:hover{
+	color: green;
 }
 .publish{
 	width: 100%;
@@ -315,8 +482,6 @@
 	margin-bottom: 15%;
 }.chat p{
 	margin: 0px;
-	display: flex;
-	justify-content: flex-start;
 }
 .input{
 	height: 10%;
@@ -367,9 +532,11 @@
 	}
 	.contain_chat{
 		width: 80%;
+		z-index: 1;
 	}
 	.chat h1{
 		margin-bottom: 3%;
+		font-size: 22px;
 	}
 	.chat_right{
 		width: 94%;
@@ -379,10 +546,40 @@
 	}
 	.is_open {
     right: 0%;
-}
+	}
+	.is-over{
+		z-index: 100;
+	}
+	.infos_middle h1{
+		font-size: 40px;
+	}
+	.chat{
+		height: 48%;
+	}
 }
 
 .is_not_clickable{
 	display: none;
 }
+.shuriken{
+	position: absolute;
+	height: 130%;
+	width: 100%;
+	top: -15%;
+}
+.shuriken_top, .shuriken_bot{
+	height: 50%;
+	width: 100%;
+	display: flex;
 
+}
+.shuriken_top{
+	justify-content: center;
+	align-items: flex-start;
+
+}
+.shuriken_bot{
+	height: 55%;
+	justify-content: center;
+	align-items: flex-end;
+}

@@ -1,18 +1,109 @@
 {% extends 'base_connected.html.twig' %}
-
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('assets/css/screen_newpartie.css')}}">
+{% endblock %}
 {% block body %}
-    <form method="post" action="{{ path('creer_partie') }}">
-        <div>
-            Choisissez l'adversaire :
-            <select name="adversaire">
-                <option value=""> Choisir</option>
-                {% for joueur in joueurs %}
-                    <option value="{{ joueur.id }}">{{ joueur.username }}</option>
-                {% endfor %}
-            </select>
+    <header class="header">
+        <!-- Navbar -->
+        <nav class="header-nav">
+            <div class="container-fluid">
+                <div class="row align-items-center">
+                    <!-- Logo -->
+                    <div class="header-logo offset-3 col-6 offset-sm-0 col-sm-2 col-lg-2 col-xl-1 order-sm-1">
+                        <img src="{{asset('assets/images/logo.png')}}" class="img-fluid" alt="logo">
+                    </div>
+                    <!-- MENU burger -->
+                    <div class="d-flex col-12 justify-content-center align-items-center">
+                        <div id="burger-container">
+                            <div id="burger">
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- MENU items -->
+                    <ul class="header-menu col-12 offset-sm-3 col-sm offset-lg-3 col-lg offset-xl-7 col-xl d-flex align-items-center justify-content-between order-1">
+                        {% if is_granted('ROLE_ADMIN') %}
+                            <a href="{{path('admin')}}">Administration</a>
+                        {% endif %}
+                        <a href="{{path('home')}}">Accueil</a>
+                        <a href="{{path('rules')}}">Regles</a>
+                        <a href="{{path('profil')}}">Profil</a>
+                        <a href="{{path('classement')}}">Palmarès</a>
+
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <main class="main-bg">
+        <div class="container">
+            <div class="row main-content">
+                <div class="col-12 col-lg-7 main-choix text-center">
+                    <h2>Choisis ton adversaire</h2>
+                    <!-- ADVERSAIRES -->
+                    <form class="row align-items-center" method="post" action="{{ path('creer_partie') }}">
+                        <div class="col-12 col-md-6">
+								<span class="custom-dropdown custom-dropdown--white">
+									<select class="custom-dropdown__select custom-dropdown__select--white" name="adversaire" id="adversaire">
+										{% for joueur in joueurs %}
+                                            <option value="{{ joueur.id }}">{{ joueur.username }}</option>
+                                        {% endfor %}
+									</select>
+								</span>
+                        </div>
+                        <div class="offset-3 offset-md-0 col-6">
+                            <div class="btn">
+                                <input type="submit" value="Créer la partie">
+                            </div>
+                        </div>
+                    </form>
+                    <!-- OU -->
+                    <div class="row justify-content-center">
+                        <h2>OU choisis un ami</h2>
+                    </div>
+                    <!-- AMIS -->
+                    <form method="post" action="{{ path('creer_partie') }}">
+                        <div class="row main-friends align-items-center">
+                            <div class="col-12 col-md-6">
+								<span class="custom-dropdown custom-dropdown--white">
+									<select class="custom-dropdown__select custom-dropdown__select--white" name="adversaire" id="amis">
+										{% for key, value in amis %}
+                                            <option value="{{ value }}">{{ key }}</option>
+                                        {% endfor %}
+									</select>
+								</span>
+                            </div>
+                            <div class="offset-3 offset-md-0 col-6">
+                                <div class="btn">
+                                    <input type="submit" value="Créer une partie avec un ami">
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+                <form class="col-12 offset-lg-1 col-lg-4 main-parties text-center">
+                    <div class="container">
+                        <h2>Dernières parties</h2>
+                        <div class="overflow-scroll">
+                            {% for partie in parties %}
+                                    <div class="row main-rejoindre">
+                                        <div class="btn-joueur col-5 col-sm-6">
+                                            <a href="#">{{ partie.id }}</a>
+                                        </div>
+                                        <div class="btn-rejoindre offset-1 col-4 col-sm-5">
+                                            <a href="{{ path('afficher_partie',{'id':partie.id}) }}">Rejoindre</a>
+                                        </div>
+                                    </div>
+                            {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
         </div>
-        <div>
-            <input type="submit" value="Créer la partie">
-        </div>
-    </form>
+    </main>
 {% endblock %}

@@ -1,8 +1,42 @@
-{{ form_start(form) }}
-    {{ form_row(form.username) }}
-    {{ form_row(form.email) }}
-    {{ form_row(form.password.first) }}
-    {{ form_row(form.password.second) }}
-
-    <button type="submit">S'inscrire !</button>
-{{ form_end(form) }}
+{% extends 'base_public.html.twig' %}
+ {% block stylesheets %}
+     <link rel="stylesheet" href="{{ asset('assets/css/screen_register.css') }}"/>
+ {% endblock %}
+{% block body %}
+    <main class="main d-flex align-items-center">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 col-md-8 offset-md-2 main-form">
+                    {{ form_start(form) }}
+                        <div class="row">
+                            <img class="logo-main img-fluid" src="{{ asset('assets/images/logo.svg') }}" alt="logo">
+                        </div>
+                        <div class="row fieldset">
+                            {{ form_row(form.username, {'attr' : {'id': 'pseudo', 'class' : 'col-12 col-lg', 'type': 'text', 'placeholder': 'Saisir votre pseudo'}}) }}
+                        </div>
+                        <div class="row fieldset">
+                            {{ form_row(form.email, {'attr' : {'id': 'mail', 'class' : 'col-12 col-lg', 'type': 'email', 'placeholder': 'Saisir votre email'}}) }}
+                        </div>
+                        <div class="row fieldset">
+                            {{ form_row(form.password.first, {'attr' : {'id': 'password', 'class' : 'col-12 col-lg', 'type': 'password', 'placeholder': 'Saisir votre mot de passe'}}) }}
+                        </div>
+                        <div class="row fieldset">
+                            {{ form_row(form.password.second, {'attr' : {'id': 'password', 'class' : 'col-12 col-lg', 'type': 'password', 'placeholder': 'Saisir votre mot de passe'}}) }}
+                        </div>
+                        <div class="row">
+                            <div class="col-8 col-sm-6 offset-sm-3 col-lg-4 offset-2 offset-lg-4 btn">
+                                <button class="btn-text" type="submit">S'inscrire</button>
+                            </div>
+                        </div>
+                    {{ form_end(form) }}
+                </div>
+            </div>
+        </div>
+    </main>
+    </body>
+{% endblock %}
+{% block javascripts %}
+    <script>
+        $('.row .fieldset div').css({'width':'100%','text-align':'center'});
+    </script>
+{% endblock %}

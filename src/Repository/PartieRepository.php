@@ -19,6 +19,14 @@ class PartieRepository extends ServiceEntityRepository
         parent::__construct($registry, Partie::class);
     }
 
+    public function cherchePartie($id){
+        return $this->createQueryBuilder('p')
+            ->where('p.j1_id = :id OR p.j2_id = :id')
+            ->setParameter('id',$id)
+            ->getQuery()
+            ->getResult();
+    }
+
     /*
     public function findBySomething($value)
     {

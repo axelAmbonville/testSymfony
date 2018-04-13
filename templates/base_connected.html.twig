@@ -4,20 +4,23 @@
         <meta charset="UTF-8">
         <meta name=”viewport” content=”width=device-width, initial-scale=1”>
         <title>{% block title %}Débuter le jeu la route du Shinobi{% endblock %}</title>
-        
+
+        <script defer src="https://use.fontawesome.com/releases/v5.0.9/js/all.js"></script>
         <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.css') }}"/>
         <link rel="stylesheet" href="{{ asset('assets/css/bootstrap-grid.css') }}"/>
         <link rel="stylesheet" href="{{ asset('assets/css/bootstrap-reboot.css') }}"/>
         <link rel="stylesheet" href="{{ asset('assets/css/screen.css')}}">
+        <link rel="stylesheet" href="{{ asset('assets/css/animate.min.css')}}">
+
+        <script type='text/javascript' src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
+        <script type='text/javascript' src="{{ asset('assets/js/bootstrap.js') }}"></script>
+        <script type='text/javascript' src="{{ asset('assets/js/bootstrap.bundle.js') }}"></script>
+        <script src="{{asset('assets/js/socket.io.js')}}"></script>
         {% block stylesheets %}{% endblock %}
     </head>
     <body>
         {% block menu %}{% endblock %}
         {% block body %}{% endblock %}
-        <script type='text/javascript' src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
-        <script type='text/javascript' src="{{ asset('assets/js/bootstrap.js') }}"></script>
-        <script type='text/javascript' src="{{ asset('assets/js/bootstrap.bundle.js') }}"></script>
-        <script src="{{asset('assets/js/nav-toggle.js')}}"></script>
         {% block javascripts %}{% endblock %}
     </body>
 </html>

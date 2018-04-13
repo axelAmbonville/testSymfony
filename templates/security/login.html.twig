@@ -1,33 +1,42 @@
-
+{% extends 'base_public.html.twig' %}
+ {% block stylesheets %}
+     <link rel="stylesheet" href="{{ asset('assets/css/screen_login.css') }}"/>
+ {% endblock %}
 {% block body %}
     {% if error %}
         <div class="alert alert-danger">
-            {{ error.messageKey }}
+            Identifiants Invalides!
         </div>
     {% endif %}
- 
-    <div class="row">
-        <div class="col-sm-5">
-            <div class="well">
-                <form action="{{ path('security_login') }}" method="post">
-                    <fieldset>
-                        <legend><i class="fa fa-lock" aria-hidden="true"></i> Connexion</legend>
-                        <div class="form-group">
-                            <label for="username">Username</label>
-                            <input type="text" id="username" name="_username" value="{{ last_username }}" class="form-control"/>
+
+
+    <main class="main d-flex align-items-center">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 col-md-8 offset-md-2 main-form">
+                    <form method="POST" action="{{ path('security_login') }}">
+                        <div class="row">
+                            <img class="logo-main img-fluid" src="{{ asset('assets/images/logo.svg')}}" alt="logo">
                         </div>
-                        <div class="form-group">
-                            <label for="password">Mot de passe</label>
-                            <input type="password" id="password" name="_password" class="form-control" />
+                        <div class="row fieldset">
+                            <label class="col-12 col-lg" for="username">Identifiant</label>
+                            <input id="username" class="col-12 col-lg" type="text" placeholder="Saisir votre pseudo" value="{{ last_username }}" class="form-control" name="_username" required>
+                        </div>
+                        <div class="row fieldset pb-0">
+                            <label class="col-12 col-lg" for="password">Mot de passe</label>
+                            <input id="password" class="col-12 col-lg" type="password" name="_password" placeholder="Saisir votre mot de passe" class="form-control" required>
                         </div>
                         <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}"/>
-                        <button type="submit" class="btn btn-primary">
-                            <i class="fa fa-sign-in" aria-hidden="true"></i> Se connecter
-                        </button>
-                    </fieldset>
-                </form>
+                        <div class="row">
+                            <div class="col-8 col-sm-6 offset-sm-3 col-lg-4 offset-2 offset-lg-4 btn">
+                                <button class="btn-text" type="submit">Se connecter</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
+    </main>
  
         
 {% endblock %}
